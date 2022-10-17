@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Api;
+namespace Draft\Controller;
 
 class Youtube {
 	public function __construct(){

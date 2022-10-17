@@ -3,8 +3,8 @@
     "description": "Alfatrinint PHP/MySQL",
     "autoload": {
         "psr-4": {
-            "Framework\\": "draft/framework",
-            "Api\\": "draft/api"
+            "Draft\\Controller\\": "draft/controller",
+            "Templates\\": "draft/templates"
         }
     },
     "authors": [

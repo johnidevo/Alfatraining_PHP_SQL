@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Framework;
+namespace Templates;
 
 class View {
 	public function __construct() {
