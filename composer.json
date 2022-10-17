@@ -1,0 +1,26 @@
+{
+    "name": "root/alfatraining_php_sql",
+    "description": "Alfatrinint PHP/MySQL",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "draft/framework",
+            "Api\\": "draft/api"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robert-Dan Dumitrascu"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.12.1"
+    },
+    "scripts": {
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "YouTube"
+        ]
+    }
+}
