@@ -106,6 +106,8 @@ $aHeader = array(
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$r = curl_exec($ch);
 	var_dump($r);
+	fwrite($fp, $r)
+	
 	curl_close($ch);
 	fclose($fp);
 #}
