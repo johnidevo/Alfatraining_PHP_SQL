@@ -14,6 +14,7 @@ class ComposerStaticInit89bb476b1cd65b20c4c7f0f8c89a1b61
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
+        'fd2a09c39b66ed4903a8bad378c7878f' => __DIR__ . '/../..' . '/draft/controller/Youtube.php',
     );
 
     public static $prefixLengthsPsr4 = array (

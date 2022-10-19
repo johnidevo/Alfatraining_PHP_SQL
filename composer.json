@@ -1,18 +1,21 @@
 {
-    "name": "root/alfatraining_php_sql",
-    "description": "Alfatrinint PHP/MySQL",
-    "autoload": {
-        "psr-4": {
-            "Draft\\Controller\\": "draft/controller",
-            "Templates\\": "draft/templates"
-        }
-    },
-    "authors": [
-        {
-            "name": "Robert-Dan Dumitrascu"
-        }
-    ],
-    "require": {
-        "google/apiclient": "^2.12.1"
-    }
+	"name": "root/alfatraining_php_sql",
+	"description": "Alfatrinint PHP/MySQL",
+	"autoload": {
+		"psr-4": {
+				"Draft\\Controller\\": "draft/controller",
+				"Templates\\": "draft/templates"
+		},
+		"files": [
+			"draft/controller/Youtube.php"
+		]
+	},
+	"authors": [
+		{
+				"name": "Robert-Dan Dumitrascu"
+		}
+	],
+	"require": {
+		"google/apiclient": "^2.12.1"
+	}
 }
