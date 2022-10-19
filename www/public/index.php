@@ -81,12 +81,9 @@ $file = 'people.png';
 file_put_contents($file, $pic);
 	
 	
-$headers    = [];
-$headers[]  = 'Content-Type: image/jpeg';
-$headers[]  = 'Accept: */*';
-	
+
 $aHeader = array(
-	'GET /id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ HTTP/2',
+	#'GET /id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ HTTP/2',
 	#'Host: i.picsum.photos',
 	'User-Agent: Stadtbibliothek/Giesing',
 	'Accept: */*',
