@@ -78,7 +78,7 @@ $file = 'people.png';
 // Append a new person to the file
 #$current .= "John Smith\n";
 // Write the contents back to the file
-file_put_contents($file, $pic);
+#file_put_contents($file, $pic);
 	
 	
 
@@ -100,16 +100,18 @@ $aHeader = array(
 	curl_setopt($ch, CURLOPT_HEADER, false);
 	curl_setopt($ch, CURLOPT_HTTPHEADER, $aHeader);
 	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	$r = curl_exec($ch);
-	var_dump($r);
-	fwrite($fp, $r);
+	#curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	#curl_setopt($ch, CURLOPT_COOKIEJAR, 'cookie.txt');
+	#curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);  
+	$sContent = curl_exec($ch);
+	#var_dump($r);
+	fwrite($fp, $sContent);
 	
 	curl_close($ch);
 	fclose($fp);
 #}
 
-
+var_dump('####+')
 ?>
 	
 </body>
