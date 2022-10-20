@@ -7,7 +7,9 @@
 				"Templates\\": "draft/templates"
 		},
 		"files": [
-			"draft/controller/Youtube.php"
+			"draft/model/youtube.php",
+			"draft/model/picsum.php",
+			"draft/view/main.php"
 		]
 	},
 	"authors": [
