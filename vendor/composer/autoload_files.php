@@ -13,7 +13,10 @@ return array(
     '1f87db08236948d07391152dccb70f04' => $vendorDir . '/google/apiclient-services/autoload.php',
     'decc78cc4436b1292c6c0d151b19445c' => $vendorDir . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
     'a8d3953fd9959404dd22d3dfcd0a79f0' => $vendorDir . '/google/apiclient/src/aliases.php',
+    'e14f145ded0f1b240d5ff218858d7760' => $baseDir . '/draft/view/main.php',
     '17ec2a9ab47819e827039ae17184e97b' => $baseDir . '/draft/model/youtube.php',
     'ad6416b30e97533365a37bd333b305e1' => $baseDir . '/draft/model/picsum.php',
-    'e14f145ded0f1b240d5ff218858d7760' => $baseDir . '/draft/view/main.php',
+    '2656c45e78d39e78f4d6e7a57716f26d' => $baseDir . '/draft/controller/error.php',
+    '9db60a4b6f4eb81aad30842c40a325c4' => $baseDir . '/draft/controller/router.php',
+    '2869b0876ca042b6deb0dd5bab09df8a' => $baseDir . '/draft/controller/dispatcher.php',
 );

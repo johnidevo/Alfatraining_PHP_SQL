@@ -14,9 +14,12 @@ class ComposerStaticInit89bb476b1cd65b20c4c7f0f8c89a1b61
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
+        'e14f145ded0f1b240d5ff218858d7760' => __DIR__ . '/../..' . '/draft/view/main.php',
         '17ec2a9ab47819e827039ae17184e97b' => __DIR__ . '/../..' . '/draft/model/youtube.php',
         'ad6416b30e97533365a37bd333b305e1' => __DIR__ . '/../..' . '/draft/model/picsum.php',
-        'e14f145ded0f1b240d5ff218858d7760' => __DIR__ . '/../..' . '/draft/view/main.php',
+        '2656c45e78d39e78f4d6e7a57716f26d' => __DIR__ . '/../..' . '/draft/controller/error.php',
+        '9db60a4b6f4eb81aad30842c40a325c4' => __DIR__ . '/../..' . '/draft/controller/router.php',
+        '2869b0876ca042b6deb0dd5bab09df8a' => __DIR__ . '/../..' . '/draft/controller/dispatcher.php',
     );
 
     public static $prefixLengthsPsr4 = array (
