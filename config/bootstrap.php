@@ -3,8 +3,10 @@
 # PSR-4 autoload
 require(__DIR__ .'/../vendor/autoload.php');
 
-!defined('MY_CONST') && define('MY_CONST', 'hello');
-!defined('WWW') && define('WWW', __DIR__ .'/../www/public');
+!defined('ROOT') && define('ROOT', __DIR__ .'/../');
+!defined('BIN') && define('BIN', ROOT .'/bin/');
+!defined('WWW') && define('WWW', ROOT .'/www/');
+!defined('DRAFT') && define('DRAFT', ROOT .'/draft/');
 
 
 ?>

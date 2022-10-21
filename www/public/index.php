@@ -21,7 +21,6 @@
 
 <body>
 
-
 <table>
 	<thead>
 		<tr>
@@ -49,10 +48,13 @@
 
 	var_dump(array(
 		__FILE__,
-		WWW,
-		MY_CONST
+		'BIN_BIN_BIN_BIN',
+		BIN,
+		scandir(BIN),
+		file_exists(BIN .'.gitkeep')
 	));
-	var_dump('####+')
+	var_dump('####+');
+	var_dump(scandir(DRAFT));
 ?>
 	
 </body>

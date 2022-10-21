@@ -9,4 +9,5 @@ var_dump(array(
 	__FILE__,
 	#PUBLIC
 ));
+
 ?>
