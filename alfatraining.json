@@ -2,13 +2,13 @@
 	"name": "root/alfatraining_php_sql",
 	"description": "Alfatrinint PHP/MySQL",
 	"autoload": {
-		"psr-4": {
-				"Draft\\Controller\\": "draft/controller",
-				"Templates\\": "draft/templates"
-		},
 		"files": [
-			"draft/controller/error.php",
+			"draft/view/error.php",
 			"draft/view/main.php",
+			"draft/model/widget.php",
+			"draft/controller/view.php",
+			"draft/model/frontend.php",
+			"draft/controller/model.php",
 			"draft/controller/router.php",
 			"draft/controller/dispatcher.php"
 		]
@@ -17,8 +17,5 @@
 		{
 				"name": "Robert-Dan Dumitrascu"
 		}
-	],
-	"require": {
-		"google/apiclient": "^2.12.1"
-	}
+	]
 }

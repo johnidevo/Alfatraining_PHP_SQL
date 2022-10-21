@@ -7,4 +7,11 @@
 # call {widget_name}.on.load() function inside js tags
 # 
 
+
+function widget_init()
+{
+	var_dump('widget_init');
+	return true;
+}
+
 ?>
