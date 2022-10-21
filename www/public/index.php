@@ -50,11 +50,15 @@
 		__FILE__,
 		'BIN_BIN_BIN_BIN',
 		BIN,
-		scandir(BIN),
+		file_get_contents(DRAFT .'static/main.js'),
 		file_exists(BIN .'.gitkeep')
 	));
 	var_dump('####+');
 	var_dump(scandir(DRAFT));
+	
+	var_dump(scandir(DRAFT));
+	
+	print '<script type="text/javascript">'. file_get_contents(DRAFT .'static/main.js') .'</script>';
 ?>
 	
 </body>
