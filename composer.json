@@ -7,10 +7,8 @@
 				"Templates\\": "draft/templates"
 		},
 		"files": [
-			"draft/view/main.php",
-			"draft/model/youtube.php",
-			"draft/model/picsum.php",
 			"draft/controller/error.php",
+			"draft/view/main.php",
 			"draft/controller/router.php",
 			"draft/controller/dispatcher.php"
 		]

@@ -10,12 +10,41 @@
 #-call view // setup html document
 
 #end dispatcher // build
+$name = "Nathan";
 
-global $sPage;
+function greetings() {
+    global $name;
+    $name = "Joe";
+    echo $name;
+}
 
-function dispatcher_dispatch() {
+//👇 prints Joe
+greetings();
+
+//👇 prints Joe as well
+echo $name;
+
+
+
+/*
+global $a_router_uri;
+
+function dispatcher_dispatch()
+{
+
+var_dump($a_router_uri);
 	if (!router_get()) error_throw('router_get()');
+	#var_dump($a_router_uri);
 	return true;
 }
 
+
+dispatcher_dispatch($a_router_uri);
+
+
+var_dump($a_router_uri);
+#echo '<pre>';
+#var_dump($GLOBALS);
+#echo '</pre>';
+*/
 ?>
