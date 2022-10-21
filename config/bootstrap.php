@@ -5,14 +5,14 @@
 !defined('WWW') && define('WWW', ROOT .'/www/');
 !defined('DRAFT') && define('DRAFT', ROOT .'/draft/');
 
-# PSR-4 autoload //disabled
-#require(__DIR__ .'/../vendor/autoload.php');
-
-function autoload_custom() {
+function autoload_custom()
+{
 	$sComposer = file_get_contents(ROOT .'composer.json');
-	var_dump($sComposer);
+	$aComposer = json_decode($sComposer);
+	foreach($aComposer->autoload->files as $sFile) include(ROOT . $sFile);
 }
 
+autoload_custom();
 
 
 ?>
