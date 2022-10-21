@@ -1,3 +1,3 @@
-composer dump-autoload
-cd ./www/public/
+
+cd ./www/
 php -S 0.0.0.0:80

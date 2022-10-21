@@ -1,14 +1,24 @@
 <?php
 
-global $a_router_uri;
+global $aRouter;
+$aRouter = array();
 
-$a_router_uri = array();
+function router_init()
+{
+	global $aRouter;
+	
+
+	
+	$aRouter = array_merge($aRouter, $_GET);
+	var_dump('router_get');
+	return true;
+}
+
 
 function router_get()
 {
-	global $a_router_uri;
-	#$a_router_uri = array_merge($a_router_uri, $_GET);
-	$a_router_uri = array_merge($a_router_uri, array('router_get'));
+	global $aRouterURI;
+	$a_router_uri = array_merge($aRouterURI, $_GET);
 	var_dump('router_get');
 	return true;
 }

@@ -10,8 +10,12 @@
 
 function widget_init()
 {
+	global $aView;
+	var_dump($aView);
 	var_dump('widget_init');
+	if (!view_get_page()) error_throw('view_get_page()');
 	return true;
 }
+
 
 ?>
