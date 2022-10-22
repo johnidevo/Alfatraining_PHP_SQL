@@ -35,7 +35,6 @@ function user_login()
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
 	#$aRouter['page'] = 'dashboard';
-	var_dump($aRouter);
 	return true;
 }
 
@@ -55,7 +54,6 @@ function user_register()
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
 	#$aRouter['page'] = 'dashboard';
-	var_dump($aRouter);
 	return true;
 }
 
@@ -63,7 +61,7 @@ function user_logout()
 {
 	global $aRouter;
 	#die(var_dump($aRouter));
-	unset($_SESSION);
+	session_destroy();
 	var_dump($aRouter);
 	$aRouter['page'] = 'home';
 	return true;

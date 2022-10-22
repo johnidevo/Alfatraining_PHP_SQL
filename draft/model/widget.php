@@ -55,7 +55,6 @@ function widget_nav()
 	foreach ($aPagesNav as $sLink => $sName) {
 		if ($aRouter['page'] == $sLink) $sSelected = 'selected';
 		else $sSelected = '';
-		var_dump($_SESSION['user']);
 		if (isset($_SESSION['user']) && $sLink == 'login') continue;
 		if (isset($_SESSION['user']) && $sLink == 'register') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'logout') continue;

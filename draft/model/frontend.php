@@ -10,21 +10,23 @@ global $oMysql, $sQuery, $aResults, $bResult;
 
 function frontend_init()
 {
-	if (!frontend_sql_open()) error_throw('frontend_sql_open()');
+	#if (!frontend_sql_open()) error_throw('frontend_sql_open()');
 	return true;
 }
 
 function frontend_sql_open()
 {
 	global $oMysql, $sQuery, $aResults;
+
 	$oMysql = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-	#var_dump($oMysql);
+	
 	return true;
 }
 
 function frontend_sql_query()
 {
 	global $oMysql, $sQuery, $aResults;
+	var_dump([$oMysql, $sQuery, $aResults]);
 	$aResults = mysqli_query($oMysql, $sQuery);
 	return true;
 }
@@ -32,6 +34,7 @@ function frontend_sql_query()
 function frontend_sql_fetch()
 {
 	global $oMysql, $sQuery, $aResults;
+	var_dump([$oMysql, $sQuery, $aResults]);
 	$aResults = mysqli_query($oMysql, $sQuery);
 	$aResults = mysqli_fetch_array($aResults, MYSQLI_ASSOC);
 	return true;

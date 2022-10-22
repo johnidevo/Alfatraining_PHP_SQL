@@ -20,6 +20,10 @@ function view_page()
 		include(DRAFT .'view/'. $aRouter['page'] .'.php');
 		call_user_func($aRouter['page'] .'_init');
 	}
+	
+	
+	var_dump($_SESSION);
+	
 	return true;
 }
 
