@@ -6,15 +6,15 @@ $aView = array();
 function view_setup()
 {
 	var_dump('view_setup');
-	if (!view_set_variables()) error_throw('view_set_variables()');
-	if (!view_get_page()) error_throw('view_get_page()');
+	if (!view_page()) error_throw('view_page()');
 	return true;
 }
 
-function view_set_variables() {
-	global $aView;
-	global $aView;
-	var_dump(file_exists(DRAFT .'view/main.php'));
+function view_page()
+{
+	global $aRouter;
+	include(DRAFT .'view/'. $aRouter['page'] .'.php');
+	call_user_func($aRouter['page'] .'_init');
 	return true;
 }
 

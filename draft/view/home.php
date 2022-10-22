@@ -4,17 +4,17 @@
 #set data variable for javascript if needed
 #
 
-global $sContent;
-$sContent = '';
+global $sPage;
+$sPage = '';
 
 
-$sContent .= '<nav class="shadow">
+$sPage .= '<nav class="shadow">
 	<div class="container">
 		<h2>Suite & Ziel <small>Charts</small></h2>
 	</div>
 </nav>';
 
-$sContent .= '<main>
+$sPage .= '<main>
 	<div class="container">
 		<div id="sidebar">
 			<div id="settings"></div>
@@ -26,12 +26,15 @@ $sContent .= '<main>
 </main>';
 
 
+#$aWidget['script'] .= '<script>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js') .'</script>';
+
+/*
 function home_init()
 {
-	global $sContent;
+	global $sPage;
 	var_dump('home_init');
 	return true;
 }
-
+*/
 
 ?>

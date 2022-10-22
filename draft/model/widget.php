@@ -8,13 +8,14 @@
 # 
 
 
-global $aWidget, $sWidgetHeader, $sWidgetFooter;
+global $aWidget;
 $aWidget = array();
-$sWidgetHeader = $sWidgetFooter = '';
 
+$aWidget['header'] = $aWidget['footer'] = '';
 
-$sWidgetHeader .= '<!doctype html><html class="no-js" lang="">';
-$sWidgetHeader .= '<head>
+$aWidget['header'] .= '<!doctype html>';
+$aWidget['header'] .= '<html class="no-js" lang="">';
+$aWidget['header'] .= '<head>
   <meta charset="utf-8">
   <title></title>
   <meta name="description" content="">
@@ -27,18 +28,60 @@ $sWidgetHeader .= '<head>
 	
   <link rel="stylesheet" href="css/chart.css">
 </head>';
-$sWidgetHeader .= '<body>';
 
-#$sContent .= '<script src="js/main.js"></script>';
-$sWidgetFooter .= '</body></html>';
+$aWidget['footer'] .= '<body>';
+$aWidget['footer'] .= '</body></html>';
 
+
+
+function widget_js()
+{
+	global $aRouter, $aWidget;
+	$aWidget['script'] = '<script>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js') .'</script>';
+	var_dump('widget_js');
+	return true;
+}
+
+function widget_css()
+{
+	global $aRouter, $aWidget;
+	$aWidget['style'] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
+	var_dump('widget_css');
+	return true;
+}
+
+function widget_html()
+{
+	
+	var_dump('widget_html');
+	return true;
+}
 
 function widget_init()
 {
-	global $aWidget, $sContent;
-	var_dump(array($sContent, $aWidget));
+	
+	if (!widget_js()) error_throw('widget_js()');
+	if (!widget_css()) error_throw('widget_css()');
+	
+	global $aRouter, $sPage, $aWidget;
+	
+	$aWidget = array_merge($aWidget, array(
+		#$aWidget['header'],
+		#$aWidget['script'],
+		#$aWidget['footer'],
+		$aRouter,
+		$sPage
+	));
+
+	var_dump(array(
+		'######',
+		#$aWidget,
+		#$aRouter,
+		$sPage 
+	));
+	
+	print implode($aWidget);
 	var_dump('widget_init');
-	if (!view_get_page()) error_throw('view_get_page()');
 	return true;
 }
 
