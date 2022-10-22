@@ -24,7 +24,7 @@ function view_page()
 }
 
 function view_get_page() {
-	#var_dump(file_exists(DRAFT .'view/main.php'));
+	var_dump(file_exists(DRAFT .'view/main.php'));
 	return true;
 }
 

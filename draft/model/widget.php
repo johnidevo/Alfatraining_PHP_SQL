@@ -71,9 +71,6 @@ function widget_nav()
 function widget_events()
 {
 	global $aRouter, $aEvent, $aWidget;
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
-	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
 	return true;
 }
 

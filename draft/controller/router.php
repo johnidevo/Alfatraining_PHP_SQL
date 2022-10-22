@@ -1,7 +1,7 @@
 <?php
 
-global $aRouter, $aEvent;
-$aRouter = array();
+global $aRouter, $aUser, $aEvent;
+$aRouter = $aUser = $aEvent = array();
 
 function router_init()
 {
