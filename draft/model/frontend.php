@@ -10,7 +10,7 @@ define('DB_NAME', 'calendar');
 function frontend_init()
 {
 	var_dump('frontend_init');
-	if (!frontend_db_open()) error_throw('frontend_db_open()');
+	#if (!frontend_db_open()) error_throw('frontend_db_open()');
 	return true;
 }
 
@@ -20,6 +20,18 @@ function frontend_db_open()
 	var_dump($oMysql);
 	return true;
 }
+
+/*
+- The data is stored in a database
+- An external area (without login protection)
+- An internal area (protected via login)
+- Display appointments in an overview
+- Display appointments individually in a detailed view
+- Create new appointments
+- Search appointments
+- Edit appointments
+- Delete appointments
+*/
 
 
 ?>

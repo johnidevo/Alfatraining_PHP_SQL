@@ -4,11 +4,9 @@
 	"autoload": {
 		"files": [
 			"draft/view/error.php",
-			"draft/view/main.php",
 			"draft/model/widget.php",
 			"draft/controller/view.php",
 			"draft/model/frontend.php",
-			"draft/controller/model.php",
 			"draft/controller/router.php",
 			"draft/controller/dispatcher.php"
 		]
