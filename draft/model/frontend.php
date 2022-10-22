@@ -26,7 +26,6 @@ function frontend_sql_query()
 {
 	global $oMysql, $sQuery, $aResults;
 	$aResults = mysqli_query($oMysql, $sQuery);
-	#var_dump($oMysql);
 	return true;
 }
 
@@ -34,8 +33,7 @@ function frontend_sql_fetch()
 {
 	global $oMysql, $sQuery, $aResults;
 	$aResults = mysqli_query($oMysql, $sQuery);
-	$aResults = mysqli_fetch_array($aResults, MYSQLI_NUM);
-	#var_dump($oMysql);
+	$aResults = mysqli_fetch_array($aResults, MYSQLI_ASSOC);
 	return true;
 }
 

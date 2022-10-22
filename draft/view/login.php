@@ -18,7 +18,7 @@ $aPage['content'] .= '<main>
 		<div id="content">
 			<h3>Login</h3>
 			<hr><br/>
-			<form action="?page=register" method="post">
+			<form action="?page=login" method="post">
 				<label for="password">Benutzer:</label> 
 				<input type="text" name="username" value="John"/>
 				<label for="password">Passwort:</label> 

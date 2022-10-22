@@ -1,7 +1,15 @@
 <?php
 
-global $aRouter, $aUser, $aEvent;
-$aRouter = $aUser = $aEvent = array();
+global $aRouter, $aEvent;
+$aRouter = $aEvent = array();
+
+function session_init()
+{
+	session_start();
+	if (isset($_SESSION['user'])) return true;
+	$_SESSION['user'] = array();
+	return true;
+}
 
 function router_init()
 {

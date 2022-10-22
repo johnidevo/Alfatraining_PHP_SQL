@@ -8,34 +8,43 @@ function model_init()
 	switch($aRouter['page'])
 	{
 		case 'login':
-			if (!model_login_user()) error_throw('model_login_user()');;
+			if (!user_login()) error_throw('user_login()');;
 		break;
 		case 'register':
-			if (!model_register_user()) error_throw('model_register_user()');;
+			if (!user_register()) error_throw('user_register()');;
 		break;
 	}
 	
 	return true;
 }
 
-function model_login_user()
+function user_login()
 {
-	global $aUser;
+	global $sQuery, $aResults;
+	if (empty($_POST)) return true;
+	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
-	
-	#$_POST['username'] $_POST['password'];
-	var_dump($_POST);
+	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	$_SESSION['user'] = $aResults;
 	return true;
 }
 
-function model_register_user()
+function user_register()
 {
-	global $aUser;
+	global $sQuery, $aResults;
+	if (empty($_POST)) return true;
+	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
-	#$_POST['username'] $_POST['password'];
-	var_dump($_POST);
+	$sDateRegistration = strtotime('now');
+	$sQuery = "INSERT INTO `users` (`id`, `user`, `password`, `registration`) 
+		VALUES (NULL, '". $_POST['username'] ."', '". $_POST['password'] ."',". $sDateRegistration .");";
+	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
+	
+	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	$_SESSION['user'] = $aResults;
 	return true;
 }
-
 
 ?>
