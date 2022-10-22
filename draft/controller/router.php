@@ -6,22 +6,26 @@ $aRouter = array();
 function router_init()
 {
 	global $aRouter;
-	
-
-	
+	if (empty($_GET)) router_redirect();
 	$aRouter = array_merge($aRouter, $_GET);
-	var_dump('router_get');
 	return true;
 }
 
-
-function router_get()
+function router_redirect($sPage = 'home', $sMode = null, $iId = null)
 {
-	global $aRouterURI;
-	$a_router_uri = array_merge($aRouterURI, $_GET);
-	var_dump('router_get');
-	return true;
+	$aUrl = array(
+		'page' => $sPage,
+		'mode' => $sMode,
+		'id' => $iId
+	);
+	header('HTTP/1.1 301 Moved Permanently');
+	header('Location: /?'. http_build_query($aUrl));
+	exit();
 }
 
+function router_()
+{
+
+}
 
 ?>

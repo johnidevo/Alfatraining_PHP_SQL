@@ -1,9 +1,8 @@
 <?php
 
+
 #set html content variable
 #set data variable for javascript
-
-
 
 function main_init()
 {
