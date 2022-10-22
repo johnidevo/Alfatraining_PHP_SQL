@@ -10,7 +10,7 @@ global $oMysql, $sQuery, $aResults, $bResult;
 
 function frontend_init()
 {
-	#if (!frontend_sql_open()) error_throw('frontend_sql_open()');
+	if (!frontend_sql_open()) error_throw('frontend_sql_open()');
 	return true;
 }
 

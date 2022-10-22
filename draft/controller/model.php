@@ -9,16 +9,16 @@ function model_init()
 	switch($aRouter['page'])
 	{
 		case 'login':
-			if (!user_login()) error_throw('user_login()');;
+			if (!user_login()) error_throw('user_login()');
 		break;
 		case 'register':
-			if (!user_register()) error_throw('user_register()');;
+			if (!user_register()) error_throw('user_register()');
 		break;
 		case 'logout':
-			if (!user_logout()) error_throw('user_logout()');;
+			if (!user_logout()) error_throw('user_logout()');
 		break;
 		case 'dashboard':
-			if (!system_init()) error_throw('system_init()');;
+			if (!system_init()) error_throw('system_init()');
 		break;
 	}
 	return true;
