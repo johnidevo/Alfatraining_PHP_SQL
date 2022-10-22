@@ -11,34 +11,10 @@
 global $aWidget;
 $aWidget = array();
 
-$aWidget['header'] = $aWidget['footer'] = '';
-
-$aWidget['header'] .= '<!doctype html>';
-$aWidget['header'] .= '<html class="no-js" lang="">';
-$aWidget['header'] .= '<head>
-  <meta charset="utf-8">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	
-  <meta property="og:title" content="">
-  <meta property="og:type" content="">
-  <meta property="og:url" content="">
-  <meta property="og:image" content="">
-	
-  <link rel="stylesheet" href="css/chart.css">
-</head>';
-
-$aWidget['footer'] .= '<body>';
-$aWidget['footer'] .= '</body></html>';
-
-
-
 function widget_js()
 {
 	global $aRouter, $aWidget;
 	$aWidget['script'] = '<script>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js') .'</script>';
-	var_dump('widget_js');
 	return true;
 }
 
@@ -46,42 +22,53 @@ function widget_css()
 {
 	global $aRouter, $aWidget;
 	$aWidget['style'] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
-	var_dump('widget_css');
 	return true;
 }
 
 function widget_html()
 {
+	global $aRouter, $sPage, $aWidget;
 	
-	var_dump('widget_html');
+	$aWidget['html'] = '';
+	
+	$aWidget['html'] .= '<!--- doctype -->';
+	$aWidget['html'] .= '<!doctype html>';
+	$aWidget['html'] .= '<!--- html -->';
+	$aWidget['html'] .= '<html class="no-js" lang="'. (isset($aRouter['lang'])? $aRouter['lang']: '') .'">';
+	
+
+	$aWidget['html'] .= '<!--- head -->';
+	$aWidget['html'] .= '<head>';
+	$aWidget['html'] .= '<meta charset="utf-8">';
+	$aWidget['html'] .= '<title></title>';
+	$aWidget['html'] .= $aWidget['style'];
+	$aWidget['html'] .= '</head>';
+	
+	$aWidget['html'] .= '<!--- /head -->';
+	$aWidget['html'] .= '<!--- body -->';
+	$aWidget['html'] .= '<body>';
+	$aWidget['html'] .= $sPage;
+	$aWidget['html'] .= $aWidget['script'];
+	$aWidget['html'] .= '</body>';
+	$aWidget['html'] .= '<!--- /body -->';
+	
+	$aWidget['html'] .= '<!--- /html -->';
+	$aWidget['html'] .= '</html>';
+	
 	return true;
 }
 
 function widget_init()
 {
 	
+	global $aWidget;
 	if (!widget_js()) error_throw('widget_js()');
 	if (!widget_css()) error_throw('widget_css()');
+	if (!widget_html()) error_throw('widget_html()');
 	
-	global $aRouter, $sPage, $aWidget;
-	
-	$aWidget = array_merge($aWidget, array(
-		#$aWidget['header'],
-		#$aWidget['script'],
-		#$aWidget['footer'],
-		$aRouter,
-		$sPage
-	));
 
-	var_dump(array(
-		'######',
-		#$aWidget,
-		#$aRouter,
-		$sPage 
-	));
-	
-	print implode($aWidget);
-	var_dump('widget_init');
+	#var_dump($aWidget);
+	print $aWidget['html'];
 	return true;
 }
 

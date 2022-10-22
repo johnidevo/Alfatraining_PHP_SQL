@@ -9,7 +9,6 @@ define('DB_NAME', 'calendar');
 
 function frontend_init()
 {
-	var_dump('frontend_init');
 	#if (!frontend_db_open()) error_throw('frontend_db_open()');
 	return true;
 }

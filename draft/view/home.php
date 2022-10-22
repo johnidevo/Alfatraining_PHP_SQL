@@ -26,15 +26,11 @@ $sPage .= '<main>
 </main>';
 
 
-#$aWidget['script'] .= '<script>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js') .'</script>';
-
-/*
 function home_init()
 {
 	global $sPage;
-	var_dump('home_init');
 	return true;
 }
-*/
+
 
 ?>
