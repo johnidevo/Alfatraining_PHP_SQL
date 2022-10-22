@@ -1,8 +1,7 @@
 <?php
 !defined('ROOT') && define('ROOT', __DIR__ .'/');
 !defined('DRAFT') && define('DRAFT', ROOT .'/draft/');
-!defined('VAR_SQL') && define('VAR_SQL', ROOT .'/var/sql/');
-!defined('WWW_PUBLIC') && define('WWW_PUBLIC', ROOT .'/www/public/');
+!defined('VAR_SQL') && define('VAR_SQL', ROOT .'/sql/');
 
 function autoload_custom()
 {

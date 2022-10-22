@@ -14,7 +14,8 @@ $aWidget = array();
 function widget_js()
 {
 	global $aRouter, $aWidget;
-	$aWidget['script'] = '<script>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js') .'</script>';
+	$sScript = file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js');
+	$aWidget['script'] = '<script>'. $sScript .PHP_EOL. $aRouter['page'] .'.on.load();</script>';
 	return true;
 }
 
@@ -36,15 +37,14 @@ function widget_html()
 	$aWidget['html'] .= '<!--- html -->';
 	$aWidget['html'] .= '<html class="no-js" lang="'. (isset($aRouter['lang'])? $aRouter['lang']: '') .'">';
 	
-
 	$aWidget['html'] .= '<!--- head -->';
 	$aWidget['html'] .= '<head>';
 	$aWidget['html'] .= '<meta charset="utf-8">';
 	$aWidget['html'] .= '<title></title>';
 	$aWidget['html'] .= $aWidget['style'];
 	$aWidget['html'] .= '</head>';
-	
 	$aWidget['html'] .= '<!--- /head -->';
+	
 	$aWidget['html'] .= '<!--- body -->';
 	$aWidget['html'] .= '<body>';
 	$aWidget['html'] .= $sPage;
@@ -60,14 +60,11 @@ function widget_html()
 
 function widget_init()
 {
-	
 	global $aWidget;
 	if (!widget_js()) error_throw('widget_js()');
 	if (!widget_css()) error_throw('widget_css()');
 	if (!widget_html()) error_throw('widget_html()');
 	
-
-	#var_dump($aWidget);
 	print $aWidget['html'];
 	return true;
 }
