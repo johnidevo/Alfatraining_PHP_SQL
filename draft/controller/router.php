@@ -11,6 +11,11 @@ function router_init()
 	return true;
 }
 
+function router_setup()
+{
+
+}
+
 function router_redirect($sPage = 'home', $sMode = null, $iId = null)
 {
 	$aUrl = array(
@@ -21,11 +26,6 @@ function router_redirect($sPage = 'home', $sMode = null, $iId = null)
 	header('HTTP/1.1 301 Moved Permanently');
 	header('Location: /?'. http_build_query($aUrl));
 	exit();
-}
-
-function router_()
-{
-
 }
 
 ?>
