@@ -1,12 +1,15 @@
-h2 {
+
+nav h2 {
 	margin: 0px;
 	padding: 20px 10px 0 25px;
 	float: left;
+	color: #fff;
 }
 
 body {
   padding: 0px;
   margin: 0px;
+	max-width: none;
 }
 
 /* nav */
@@ -17,6 +20,7 @@ nav {
 	// position: fixed;
 	z-index: 1;
 	color: white;
+	margin-bottom: 10px;
 }
 
 nav #logo { 
@@ -38,8 +42,8 @@ main {
 main #sidebar { 
 	color: white;
 	float: left;
-	width: calc(20% - 40px);
-	padding: 20px;
+	width: 360px;
+	margin: 20px;
 	background-color: #4CAF50;
 	height: 1350px;
 }
@@ -47,14 +51,15 @@ main #sidebar {
 main #content { 
 	color: red;
 	float: right;
-	width: 80%;
+	width: 760px;
+	margin: 20px;
 }   
 
 /* main */
 
 .container {
-	// width: 900px;
-	// background-color: bisque;
+	width: 1200px;
+	min-width: 1200px;
 	margin: 0px auto;
 }
 
@@ -79,4 +84,12 @@ nav ul li a {
 
 .selected{
   background-color: #0071bc;
+}
+
+form {
+  background-color: #0071bc;
+  float: left;
+  padding: 40px;
+  border-radius: 10px;
+	color: white;
 }

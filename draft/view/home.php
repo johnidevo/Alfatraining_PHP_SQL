@@ -16,7 +16,8 @@ $aPage['content'] .= '<main>
 		
 		</div>
 		<div id="content">
-			<h2>Main</h2>
+			<h3>Home</h3>
+			<hr></br>
 		</div>
 	</div>
 </main>';

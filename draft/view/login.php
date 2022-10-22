@@ -16,7 +16,18 @@ $aPage['content'] .= '<main>
 		
 		</div>
 		<div id="content">
-			<h2>Login</h2>
+			<h3>Login</h3>
+			<hr><br/>
+			<form action="?page=register" method="post">
+				<label for="password">Benutzer:</label> 
+				<input type="text" name="username" value="John"/>
+				<label for="password">Passwort:</label> 
+				<input type="password" name="password" value="muster"/>
+				<br/>
+				<input type="checkbox" name="merken" value="ja" /> Angemeldet bleiben
+				<br/>
+				<button type="submit">Anmeldung</button>
+			</form>
 		</div>
 	</div>
 </main>';
