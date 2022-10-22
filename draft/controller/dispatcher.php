@@ -19,7 +19,6 @@ function dispatcher_dispatch()
 	if (!view_setup()) error_throw('view_render()');
 	if (!widget_init()) error_throw('widget_init()');
 	
-	var_dump($_SESSION);
 	return true;
 }
 

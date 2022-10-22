@@ -9,6 +9,7 @@
 			"draft/model/frontend.php",
 			"draft/model/user.php",
 			"draft/controller/model.php",
+			"draft/controller/system.php",
 			"draft/controller/router.php",
 			"draft/controller/dispatcher.php"
 		]

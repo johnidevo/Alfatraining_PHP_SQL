@@ -7,7 +7,6 @@ function session_init()
 {
 	session_start();
 	if (isset($_SESSION['user'])) return true;
-	$_SESSION['user'] = array();
 	return true;
 }
 
