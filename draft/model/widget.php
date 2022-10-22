@@ -15,14 +15,16 @@ function widget_js()
 {
 	global $aRouter, $aWidget;
 	$sScript = file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js');
-	$aWidget['script'] = '<script>'. $sScript .PHP_EOL. $aRouter['page'] .'.on.load();</script>';
+	$aWidget['script'][] = '<script>'. $sScript .PHP_EOL. $aRouter['page'] .'.on.load();</script>';
 	return true;
 }
 
 function widget_css()
 {
 	global $aRouter, $aWidget;
-	$aWidget['style'] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
+		
+	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
+	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
 	return true;
 }
 
@@ -41,14 +43,14 @@ function widget_html()
 	$aWidget['html'] .= '<head>';
 	$aWidget['html'] .= '<meta charset="utf-8">';
 	$aWidget['html'] .= '<title></title>';
-	$aWidget['html'] .= $aWidget['style'];
+	$aWidget['html'] .= implode(PHP_EOL, $aWidget['style']);
 	$aWidget['html'] .= '</head>';
 	$aWidget['html'] .= '<!--- /head -->';
 	
 	$aWidget['html'] .= '<!--- body -->';
 	$aWidget['html'] .= '<body>';
 	$aWidget['html'] .= $sPage;
-	$aWidget['html'] .= $aWidget['script'];
+	$aWidget['html'] .= implode(PHP_EOL, $aWidget['script']);
 	$aWidget['html'] .= '</body>';
 	$aWidget['html'] .= '<!--- /body -->';
 	

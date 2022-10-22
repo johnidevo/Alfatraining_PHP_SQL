@@ -10,6 +10,7 @@ $sPage = '';
 
 $sPage .= '<nav class="shadow">
 	<div class="container">
+		<img alt="Suiteziel" id="logo" src="public/suiteziel_ug.svg">
 		<h2>Suite & Ziel <small>Charts</small></h2>
 	</div>
 </nav>';
@@ -20,7 +21,6 @@ $sPage .= '<main>
 			<div id="settings"></div>
 		</div>
 		<div id="content">
-			<div id="cover"></div>
 		</div>
 	</div>
 </main>';
