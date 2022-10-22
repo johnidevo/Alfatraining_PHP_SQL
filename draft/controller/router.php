@@ -6,8 +6,23 @@ $aRouter = array();
 function router_init()
 {
 	global $aRouter;
-	if (empty($_GET)) router_redirect();
+	if (empty($_GET)) return router_redirect();
 	$aRouter = array_merge($aRouter, $_GET);
+	if (!router_page()) error_throw('router_page()');
+	return true;
+}
+
+function router_page()
+{
+	global $aRouter;
+	if (!file_exists(DRAFT .'view/'. $aRouter['page'] .'.php')) {
+		$aRouter['page'] = 'home';
+		return router_redirect();
+	}
+	else {
+		include(DRAFT .'view/'. $aRouter['page'] .'.php');
+		call_user_func($aRouter['page'] .'_init');
+	}
 	return true;
 }
 

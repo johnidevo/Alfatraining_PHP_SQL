@@ -18,5 +18,4 @@ function dispatcher_dispatch()
 	return true;
 }
 
-
 ?>

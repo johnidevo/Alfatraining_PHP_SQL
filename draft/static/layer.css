@@ -47,7 +47,7 @@ main #sidebar {
 main #content { 
 	color: red;
 	float: right;
-	width: 85%;
+	width: 80%;
 }   
 
 /* main */
@@ -62,4 +62,21 @@ main #content {
 	-webkit-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
 	-moz-box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
 	box-shadow: 0 3px 5px rgba(57, 63, 72, 0.3);
+}
+
+nav ul {
+	list-style-type: none;
+	display: inline-flex;
+	font-size: 1.2em;
+}
+
+nav ul li a {
+  color: #febc56;
+  margin-right: 30px;
+	padding: 10px;
+	text-decoration: none;
+}
+
+.selected{
+  background-color: #0071bc;
 }

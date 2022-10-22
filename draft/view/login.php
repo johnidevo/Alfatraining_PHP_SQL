@@ -8,7 +8,7 @@ global $aPage;
 $aPage = array();
 $aPage['content'] = '';
 
-$aPage['title'] = 'Home';
+$aPage['title'] = 'Login';
 
 $aPage['content'] .= '<main>
 	<div class="container">
@@ -16,7 +16,7 @@ $aPage['content'] .= '<main>
 		
 		</div>
 		<div id="content">
-			<h2>Main</h2>
+			<h2>Login</h2>
 		</div>
 	</div>
 </main>';
