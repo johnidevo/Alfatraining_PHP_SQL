@@ -12,6 +12,7 @@ global $aWidget, $aPagesNav;
 $aWidget = array();
 $aPagesNav = array(
 	'home' => 'Startseite',
+	'dashboard' => 'Dashboard',
 	'login' => 'Login',
 	'register' => 'Register',
 	'logout' => 'Logout'
@@ -78,6 +79,7 @@ function widget_nav()
 		else $sSelected = '';
 		if (isset($_SESSION['user']) && $sLink == 'login') continue;
 		if (isset($_SESSION['user']) && $sLink == 'register') continue;
+		if (!isset($_SESSION['user']) && $sLink == 'dashboard') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'logout') continue;
 		$sLink = '<li><a class="'. $sSelected .'" href="?page='. $sLink .'">'. $sName .'</a></li>';
 		array_push($aPagesLinks, $sLink);

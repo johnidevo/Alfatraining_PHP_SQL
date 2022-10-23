@@ -8,27 +8,6 @@ function router_init()
 	global $aRouter;
 	if (empty($_GET)) return router_redirect();
 	$aRouter = array_merge($aRouter, $_GET);
-	
-	/*
-	switch($aRouter['page'])
-	{
-		case 'login':
-			$aRouter['page'] = '';
-			if (isset($_SESSION['user'])) router_redirect();
-		break;
-		case 'register':
-			$aRouter['page'] = '';
-			if (isset($_SESSION['user'])) router_redirect();
-		break;
-		case 'logout':
-			if (!isset($_SESSION['user'])) router_redirect();
-		break;
-		case 'dashboard':
-			if (!isset($_SESSION['user'])) router_redirect();
-		break;
-	}
-	*/
-	
 	return true;
 }
 

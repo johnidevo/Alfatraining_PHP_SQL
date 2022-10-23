@@ -17,9 +17,6 @@ function user_init()
 		case 'logout':
 			if (!user_logout()) error_throw('user_logout()');
 		break;
-		case 'dashboard':
-			if (!system_init()) error_throw('system_init()');
-		break;
 	}
 	return true;
 }
@@ -28,13 +25,12 @@ function user_login()
 {
 	global $aRouter, $sQuery, $aResults;
 	
-	if (!user_verify()) error_throw('user_verify()');
+	#if (!user_verify()) error_throw('user_verify()');
 	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -43,7 +39,7 @@ function user_register()
 {
 	global $aRouter, $sQuery, $aResults;
 	
-	if (!user_verify()) error_throw('user_verify()');
+	#if (!user_verify()) error_throw('user_verify()');
 	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
 	$sDateRegistration = strtotime('now');
@@ -54,8 +50,6 @@ function user_register()
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	
-	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -67,7 +61,6 @@ function user_logout()
 	unset($_SESSION);
 	session_destroy();
 	var_dump($aRouter);
-	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -76,8 +69,8 @@ function user_verify()
 {
 	if (isset($_SESSION['user']))
 	{
-		$_SESSION['redirect'] = 'home';
-		$aRouter['page'] = 'redirect';
+		#$aRouter['page'] = 'redirect';
+		#return router_redirect();
 	}
 	return true;
 }
