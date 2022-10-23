@@ -19,17 +19,16 @@ $aPage['planer'] .= '<table>';
 $aPage['planer'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', time())));
-$iDateNext = date('w', strtotime(date('Y-m-t', time())));
+$iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
+$iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 
 $iDatePrevTable = date('Y-m-d', strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days')); //<<
 $iDateNextTable = date('Y-m-d', strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days')); //<<
 
 echo '<pre>';
 #var_dump(['$iDateNow', date('w'), '$iDatePrev', date('Y-m-t', time()), '$iDateNext', date('Y-m-01 H:i:s')]);
-var_dump(['$iDatePrevTable', $iDatePrevTable, '$iDateNextTable', $iDateNextTable]);
-var_dump(['$iDateNow', $iDateNow, '$iDatePrev', $iDatePrev, '$iDateNext', $iDateNext]);
-
+#var_dump(['$iDatePrevTable', $iDatePrevTable, '$iDateNextTable', $iDateNextTable]);
+#var_dump(['$iDateNow', $iDateNow, '$iDatePrev', $iDatePrev, '$iDateNext', $iDateNext]);
 echo '</pre>';
 
 
