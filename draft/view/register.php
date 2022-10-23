@@ -35,9 +35,8 @@ $aPage['content'] .= '<main>
 </main>';
 
 
-function home_init()
+function register_init()
 {
-	#global $sPage;
 	return true;
 }
 

@@ -17,7 +17,6 @@ function view_page()
 		return router_redirect();
 	}
 	else {
-		var_dump(['file_exists', file_exists(DRAFT .'view/'. $aRouter['page'] .'.php')]);
 		include(DRAFT .'view/'. $aRouter['page'] .'.php');
 		call_user_func($aRouter['page'] .'_init');
 	}

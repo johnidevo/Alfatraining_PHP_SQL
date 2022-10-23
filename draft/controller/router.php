@@ -1,7 +1,17 @@
 <?php
 
-global $aRouter, $aEvent;
+global $aRouter, $aEvent, $aRouterNav;
 $aRouter = $aEvent = array();
+
+$aRouterNav = array(
+	'home' => 'Startseite',
+	'dashboard' => 'Dashboard',
+	'login' => 'Login',
+	'register' => 'Register',
+	'calendar' => 'Calendar',
+	'scheduler' => 'Scheduler',
+	'logout' => 'Logout'
+);
 
 function router_init()
 {

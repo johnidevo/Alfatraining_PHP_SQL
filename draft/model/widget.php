@@ -8,15 +8,8 @@
 # 
 
 
-global $aWidget, $aPagesNav;
+global $aWidget;
 $aWidget = array();
-$aPagesNav = array(
-	'home' => 'Startseite',
-	'dashboard' => 'Dashboard',
-	'login' => 'Login',
-	'register' => 'Register',
-	'logout' => 'Logout'
-);
 
 function widget_init()
 {
@@ -70,17 +63,20 @@ function widget_css()
 
 function widget_nav()
 {
-	global $aRouter, $aWidget, $aPagesNav;
+	global $aRouter, $aWidget, $aRouterNav;
 	$aWidget['nav'] = '';
 	$aPagesLinks = array();
 	
-	foreach ($aPagesNav as $sLink => $sName) {
+	foreach ($aRouterNav as $sLink => $sName) {
 		if ($aRouter['page'] == $sLink) $sSelected = 'selected';
 		else $sSelected = '';
 		if (isset($_SESSION['user']) && $sLink == 'login') continue;
 		if (isset($_SESSION['user']) && $sLink == 'register') continue;
-		if (!isset($_SESSION['user']) && $sLink == 'dashboard') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'logout') continue;
+		if (!isset($_SESSION['user']) && $sLink == 'dashboard') continue;
+		if (isset($_SESSION['user']) && $sLink == 'home') continue;
+		if (!isset($_SESSION['user']) && $sLink == 'calendar') continue;
+		if (!isset($_SESSION['user']) && $sLink == 'scheduler') continue;
 		$sLink = '<li><a class="'. $sSelected .'" href="?page='. $sLink .'">'. $sName .'</a></li>';
 		array_push($aPagesLinks, $sLink);
 	}

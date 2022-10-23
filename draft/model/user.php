@@ -17,6 +17,15 @@ function user_init()
 		case 'logout':
 			if (!user_logout()) error_throw('user_logout()');
 		break;
+		case 'dashboard':
+			if (!user_access()) error_throw('user_access()');
+		break;
+		case 'calendar':
+			if (!user_access()) error_throw('user_access()');
+		break;
+		case 'scheduler':
+			if (!user_access()) error_throw('user_access()');
+		break;
 	}
 	return true;
 }
@@ -25,13 +34,13 @@ function user_login()
 {
 	global $aRouter, $sQuery, $aResults;
 	
-	#if (!user_verify()) error_throw('user_verify()');
+	if (!user_verify()) return true;;
 	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	$aRouter['page'] = 'redirect';
+	$aRouter['page'] = 'dashboard';
 	return true;
 }
 
@@ -39,7 +48,7 @@ function user_register()
 {
 	global $aRouter, $sQuery, $aResults;
 	
-	#if (!user_verify()) error_throw('user_verify()');
+	if (!user_verify()) return true;
 	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
 	
 	$sDateRegistration = strtotime('now');
@@ -50,28 +59,30 @@ function user_register()
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	$aRouter['page'] = 'redirect';
+	$aRouter['page'] = 'dashboard';
 	return true;
 }
 
 function user_logout()
 {
 	global $aRouter;
-	#die(var_dump($aRouter));
-	unset($_SESSION);
 	session_destroy();
-	var_dump($aRouter);
 	$aRouter['page'] = 'redirect';
 	return true;
 }
 
 function user_verify()
 {
-	if (isset($_SESSION['user']))
-	{
-		#$aRouter['page'] = 'redirect';
-		#return router_redirect();
-	}
+	global $aRouter;
+	if (isset($_SESSION['user'])) return false;
+	return true;
+}
+
+function user_access()
+{
+	global $aRouter;
+	if (isset($_SESSION['user'])) return true;
+	$aRouter['page'] = 'home';
 	return true;
 }
 

@@ -26,7 +26,6 @@ function frontend_sql_open()
 function frontend_sql_query()
 {
 	global $oMysql, $sQuery, $aResults;
-	var_dump([$oMysql, $sQuery, $aResults]);
 	$aResults = mysqli_query($oMysql, $sQuery);
 	return true;
 }
@@ -34,35 +33,12 @@ function frontend_sql_query()
 function frontend_sql_fetch()
 {
 	global $oMysql, $sQuery, $aResults;
-	var_dump([$oMysql, $sQuery, $aResults]);
 	$aResults = mysqli_query($oMysql, $sQuery);
 	$aResults = mysqli_fetch_array($aResults, MYSQLI_ASSOC);
 	return true;
 }
 
-/*
 
-$query = "SELECT Name, CountryCode FROM City ORDER by ID LIMIT 3";
-$result = mysqli_query($mysqli, $query);
-
-$row = mysqli_fetch_array($result, MYSQLI_NUM);
-printf("%s (%s)\n", $row[0], $row[1]);
-
-
-mysqli_query($link, "CREATE TEMPORARY TABLE myCity LIKE City");
-
-$con=mysqli_connect("localhost","my_user","my_password","my_db");
-
-if (mysqli_connect_errno()) {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  exit;
-}
-
-// ....some PHP code...
-
-mysqli_close($con);
-
-*/
 
 /*
 - The data is stored in a database

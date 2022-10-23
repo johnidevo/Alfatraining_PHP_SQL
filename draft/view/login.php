@@ -33,7 +33,7 @@ $aPage['content'] .= '<main>
 </main>';
 
 
-function home_init()
+function login_init()
 {
 	#global $sPage;
 	return true;

@@ -8,22 +8,20 @@ global $aPage;
 $aPage = array();
 $aPage['content'] = $aPage['script'] = '';
 
-$aPage['title'] = 'Redirect';
+$aPage['title'] = 'Calendar';
 
 $aPage['content'] .= '<main>
 	<div class="container">
-		<div id="sidebar" class="redirect-sidebar">
+		<div id="sidebar">
 		</div>
 		<div id="content">
-			<h3>Redirect</h3>
+			<h3>Calendar</h3>
 			<hr></br>
 		</div>
 	</div>
 </main>';
 
-$aPage['script'] = 'window.location.href = "?page=dashboard";';
-	
-function redirect_init()
+function calendar_init()
 {
 	global $aRouter;
 	return true;
