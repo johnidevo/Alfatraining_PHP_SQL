@@ -34,7 +34,7 @@ function user_login()
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	$aRouter['redirect'] = 'home';
+	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -54,7 +54,8 @@ function user_register()
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
-	$aRouter['redirect'] = 'home';
+	
+	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -66,7 +67,7 @@ function user_logout()
 	unset($_SESSION);
 	session_destroy();
 	var_dump($aRouter);
-	$aRouter['redirect'] = 'home';
+	$_SESSION['redirect'] = 'home';
 	$aRouter['page'] = 'redirect';
 	return true;
 }
@@ -75,9 +76,8 @@ function user_verify()
 {
 	if (isset($_SESSION['user']))
 	{
-		$aRouter['redirect'] = 'home';
+		$_SESSION['redirect'] = 'home';
 		$aRouter['page'] = 'redirect';
-		#return router_redirect();
 	}
 	return true;
 }

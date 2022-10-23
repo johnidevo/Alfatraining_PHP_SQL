@@ -32,7 +32,6 @@ function view_confirm()
 	$aDisallow = array('login', 'register');
 	if (isset($_SESSION['user'])) 
 	{
-		$aRouter['redirect'] = 'home';
 		$aRouter['page'] = 'redirect';
 		if (in_array($aRouter['page'], $aDisallow)) return router_redirect();
 	}

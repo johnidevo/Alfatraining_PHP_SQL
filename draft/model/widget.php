@@ -31,9 +31,29 @@ function widget_init()
 
 function widget_js()
 {
-	global $aRouter, $aWidget;
-	$sScript = file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js');
-	$aWidget['script'][] = '<script>'. $sScript .PHP_EOL. $aRouter['page'] .'.on.load();</script>';
+	global $aRouter, $aPage, $aWidget;
+	
+	if (file_exists(DRAFT .'static/'. $aRouter['page'] .'.js')){
+		$sScript = file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js');
+		$sScriptCall = $aRouter['page'] .'.on.load();';
+	}
+	else{
+		$sScript = '';
+	}
+	
+	if (isset($aPage['script'])){
+		$sScriptPage = $aPage['script'];
+	}
+	else {
+		$sScriptPage = '';
+	}
+	
+	$aWidget['script'][] = '<script>'.PHP_EOL.
+			$sScript .PHP_EOL.
+			$sScriptPage .PHP_EOL.
+			$sScriptCall .PHP_EOL.
+		'</script>';
+	
 	return true;
 }
 
@@ -42,6 +62,7 @@ function widget_css()
 	global $aRouter, $aWidget;
 	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
 	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
+	if (file_exists(DRAFT .'static/'. $aRouter['page'] .'.css'))
 	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
 	return true;
 }
