@@ -3,13 +3,6 @@
 global $aRouter, $aEvent;
 $aRouter = $aEvent = array();
 
-function session_init()
-{
-	session_start();
-	if (isset($_SESSION['user'])) return true;
-	return true;
-}
-
 function router_init()
 {
 	global $aRouter;
