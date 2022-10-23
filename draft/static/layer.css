@@ -6,6 +6,10 @@ nav h2 {
 	color: #fff;
 }
 
+small {
+	font-size: small;
+}
+
 body {
   padding: 0px;
   margin: 0px;
@@ -45,7 +49,7 @@ main #sidebar {
 	width: 360px;
 	margin: 20px;
 	background-color: #4CAF50;
-	height: 1350px;
+	height: 750px;
 }
 
 main #content { 

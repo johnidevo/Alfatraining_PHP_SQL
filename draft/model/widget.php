@@ -54,10 +54,10 @@ function widget_js()
 function widget_css()
 {
 	global $aRouter, $aWidget;
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
 	if (file_exists(DRAFT .'static/'. $aRouter['page'] .'.css'))
 	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
+	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
+	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
 	return true;
 }
 
@@ -81,6 +81,7 @@ function widget_nav()
 		if (isset($_SESSION['user']) && $sLink == 'home') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'calendar') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'scheduler') continue;
+		if (isset($_SESSION['user']) && $sLink == 'planer') continue;
 		$sLink = '<li><a class="'. $sSelected .'" href="?page='. $sLink .'">'. $sName .'</a></li>';
 		array_push($aPagesLinks, $sLink);
 	}
