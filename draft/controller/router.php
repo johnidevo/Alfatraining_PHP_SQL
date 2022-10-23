@@ -6,6 +6,7 @@ $aRouter = $aEvent = array();
 $aRouterNav = array(
 	'home' => 'Startseite',
 	'dashboard' => 'Dashboard',
+	'planer' => 'Planer',
 	'login' => 'Login',
 	'register' => 'Register',
 	'calendar' => 'Calendar',

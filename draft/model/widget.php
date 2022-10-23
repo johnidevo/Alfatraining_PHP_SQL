@@ -61,6 +61,10 @@ function widget_css()
 	return true;
 }
 
+/*
+ 5 P 	2. Navigation: Erstellen Sie eine dynamische Navigation 
+		über mehrere Unterseiten 
+*/
 function widget_nav()
 {
 	global $aRouter, $aWidget, $aRouterNav;

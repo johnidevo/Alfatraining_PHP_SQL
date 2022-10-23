@@ -10,6 +10,10 @@ $aPage['content'] = '';
 
 $aPage['title'] = 'Home';
 
+/*
+10 P	3. Daten anzeigen: Erstellen Sie einen öffentlichen Bereich 
+		mit einer Anzeige.		
+*/
 $aPage['content'] .= '<main>
 	<div class="container">
 		<div id="sidebar">

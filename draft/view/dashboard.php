@@ -10,6 +10,10 @@ $aPage['content'] = $aPage['script'] = '';
 
 $aPage['title'] = 'Dashboard';
 
+/*
+10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
+		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.	
+*/
 $aPage['content'] .= '<main>
 	<div class="container">
 		<div id="sidebar">

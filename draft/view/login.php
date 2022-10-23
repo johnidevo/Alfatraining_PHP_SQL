@@ -10,6 +10,10 @@ $aPage['content'] = '';
 
 $aPage['title'] = 'Login';
 
+/*
+10 p	4. Login: Erstellen Sie einen Loginformular zum einloggen 
+		für einen internen Bereich (inkl. Logout).
+*/
 $aPage['content'] .= '<main>
 	<div class="container">
 		<div id="sidebar">
