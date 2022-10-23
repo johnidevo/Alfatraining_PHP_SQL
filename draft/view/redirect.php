@@ -21,6 +21,9 @@ $aPage['content'] .= '<main>
 	</div>
 </main>';
 
+$aPage['content'] .= '<script type="text/javascript">
+	window.location = "'. $_SESSION['redirect'] .'"
+</script>';
 
 #$aPage['script'] .= 'var router = {redirect: "?page='. $_SESSION['redirect'] .'"};'. PHP_EOL;
 #$aPage['script'] .= 'console.log(router.redirect);';

@@ -38,7 +38,7 @@ function widget_js()
 		$sScriptCall = $aRouter['page'] .'.on.load();';
 	}
 	else{
-		$sScript = '';
+		$sScript = $sScriptCall = '';
 	}
 	
 	if (isset($aPage['script'])){
