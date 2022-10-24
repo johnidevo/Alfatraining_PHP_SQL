@@ -59,7 +59,7 @@ for ($i = 9; $i <= 15; $i++)
 	$sField = $sChecked = '';
 }
 
-var_dump($aScheduler['update']);
+#var_dump($aScheduler['update']);
 	
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="Einreichen"></td></tr></tfoot>';
