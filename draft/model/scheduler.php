@@ -25,6 +25,7 @@ function scheduler_planer()
 	if (isset($aRouter['id'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (empty($_POST)) return true;
+	var_dump($_POST);
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
 	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
@@ -53,7 +54,7 @@ function scheduler_planer_update()
 	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
-	
+var_dump(array($aResults, $aScheduler['update'], date('Ymd', $aScheduler['update']['date'])));
 	if (empty($_POST)) return true;
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
