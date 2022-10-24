@@ -10,16 +10,14 @@ $aPage['content'] = $aPage['script'] = '';
 
 $aPage['title'] = 'Calendar';
 
-$aPage['content'] .= '<main>
-	<div class="container">
-		<div id="sidebar">
-		</div>
-		<div id="content">
-			<h3>Calendar</h3>
-			<hr></br>
-		</div>
+$aPage['content'] .= '
+	<div id="sidebar">
 	</div>
-</main>';
+	<div id="content">
+		<h3>Calendar</h3>
+		<hr></br>
+	</div>
+';
 
 function calendar_init()
 {

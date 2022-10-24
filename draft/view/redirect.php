@@ -10,16 +10,14 @@ $aPage['content'] = $aPage['script'] = '';
 
 $aPage['title'] = 'Redirect';
 
-$aPage['content'] .= '<main>
-	<div class="container">
-		<div id="sidebar" class="redirect-sidebar">
-		</div>
-		<div id="content">
-			<h3>Redirect</h3>
-			<hr></br>
-		</div>
+$aPage['content'] .= '
+	<div id="sidebar" class="redirect-sidebar">
 	</div>
-</main>';
+	<div id="content">
+		<h3>Redirect</h3>
+		<hr></br>
+	</div>
+';
 
 $aPage['script'] = 'window.location.href = "?page=dashboard";';
 	

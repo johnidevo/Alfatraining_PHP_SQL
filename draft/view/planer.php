@@ -60,22 +60,20 @@ $aPage['planer_sidebar'] .= '</table>';
 10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
 		mit einer Anzeige.		
 */
-$aPage['content'] .= '<main>
-	<div class="container">
-		<form action="/?'. http_build_query($aRouter) .'" method="post">
-			<div id="content">
-				<h3>Terminplaner</h3>
-				<hr></br>
-				'. $aPage['planer_content'] .'
-			</div>
-			<div id="sidebar">
-				<h3>Stunden auswählen</h3>
-				<hr></br>
-				'. $aPage['planer_sidebar'] .'
-			</div>
-		</form>
-	</div>
-</main>';
+$aPage['content'] .= '
+	<form action="/?'. http_build_query($aRouter) .'" method="post">
+		<div id="content">
+			<h3>Terminplaner</h3>
+			<hr></br>
+			'. $aPage['planer_content'] .'
+		</div>
+		<div id="sidebar">
+			<h3>Stunden auswählen</h3>
+			<hr></br>
+			'. $aPage['planer_sidebar'] .'
+		</div>
+	</form>
+';
 
 function html_planer_radio_day($sName, $iValue){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>

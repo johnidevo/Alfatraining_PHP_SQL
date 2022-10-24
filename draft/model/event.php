@@ -19,7 +19,7 @@ function event_clear()
 function event_success($sMessage = 'Success')
 {
 	global $aEvent;
-	$_SESSION['event'] = $sMessage;
+	#$_SESSION['event'] = $sMessage;
 	$aEvent = $sMessage;
 	return true;
 }

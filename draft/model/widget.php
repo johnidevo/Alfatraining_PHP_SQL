@@ -135,7 +135,9 @@ function widget_nav_theme()
 function widget_event()
 {
 	global $aRouter, $aEvent, $aWidget;
-	$aWidget['events'] = '<div class="container"><h3>'. $aEvent .'</h3></div>';
+	$aWidget['events'] = '';
+	if (empty($aEvent)) return true;
+	$aWidget['events'] = '<div id="event"><h3>'. $aEvent .'</h3></div>';
 	if (!event_clear()) error_throw('event_clear()');
 	return true;
 }
@@ -162,9 +164,11 @@ function widget_html()
 	$aWidget['html'] .= '<body>';
 	$aWidget['html'] .= $aWidget['nav'];
 	
+	$aWidget['html'] .= '<main><div class="container">';
 	$aWidget['html'] .= $aWidget['events'];
-	
 	$aWidget['html'] .= $aPage['content'];
+	$aWidget['html'] .= '</div></main>';
+	
 	$aWidget['html'] .= implode(PHP_EOL, $aWidget['script']);
 	$aWidget['html'] .= '</body>';
 	$aWidget['html'] .= '<!--- /body -->';

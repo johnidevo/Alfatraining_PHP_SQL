@@ -61,7 +61,7 @@ main #content {
 
 .container {
 	width: 1200px;
-	min-width: 1200px;
+	/* min-width: 1200px;*/
 	margin: 0px auto;
 }
 
@@ -86,4 +86,14 @@ nav ul li a {
 
 .selected{
   background-color: #0071bc;
+}
+
+#event {
+	background-color: #9abf51;
+	padding: 10px 20px 20px 20px;
+	margin: 20px;
+}
+
+#event h3 {
+	color: #fff;
 }
