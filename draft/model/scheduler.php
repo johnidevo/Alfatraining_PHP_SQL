@@ -3,7 +3,7 @@
 
 global $aScheduler;
 
-function user_init()
+function scheduler_init()
 {
 	global $aRouter;
 	switch($aRouter['page'])
@@ -18,7 +18,7 @@ function user_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults;
-	
+	var_dump($_POST);
 	return true;
 }
 

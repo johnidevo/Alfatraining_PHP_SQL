@@ -87,11 +87,11 @@ $aPage['content'] .= '<main>
 
 function html_planer_radio_day($i){
 	return '<label for="date_'. $i .'">'. $i .'</label>
-	<input type="radio" name="date_planer" id="date_'. $i .'">';
+	<input value="'. $i .'" type="radio" name="date_planer" id="date_'. $i .'">';
 }
 
 function html_planer_radio_hour($i){
-	return '<input type="radio" name="hour_planer" id="hour_'. $i .'">
+	return '<input value="'. $i .'" type="radio" name="hour_planer" id="hour_'. $i .'">
 	<label for="hour_'. $i .'">'. str_pad($i, 2, 0, STR_PAD_LEFT) .':00</label>';
 }
 

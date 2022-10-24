@@ -7,7 +7,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 22, 2022 at 06:55 PM
+-- Generation Time: Oct 24, 2022 at 01:30 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -28,6 +28,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `appointments`
+--
+
+CREATE TABLE `appointments` (
+  `id` int(11) NOT NULL,
+  `date` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -35,12 +46,28 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `user` text NOT NULL,
   `password` text NOT NULL,
-  `registration` int(11)
+  `registration` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `user`, `password`, `registration`) VALUES
+(1, 'ro', '12', NULL),
+(2, 'ro', '12', NULL),
+(3, 'John', '$2y$10$/t4umsV9BX9sVW.PsYHWf.Z3/RVMlYdVuFV3EorH.rFSIxv6jaORC', 1666457288),
+(4, 'John', '$2y$10$O7WcySEALoKUkKSTaM15T.bA8ycALsqeb8EwJE9BnAeDhV1FOCbim', 1666457354);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `appointments`
+--
+ALTER TABLE `appointments`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -53,6 +80,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `appointments`
+--
+ALTER TABLE `appointments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -62,3 +95,4 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
