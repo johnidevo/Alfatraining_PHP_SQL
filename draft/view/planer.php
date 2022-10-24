@@ -32,14 +32,14 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 	
 	if (isset($aScheduler['update']))
 	if (date('Ymd', $aScheduler['update']['date']) == date('Ymd', $i)) $sChecked = 'checked';
-	if (date('m', time()) == date('m', $i)) 
-	$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
-	else $sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
+	if (date('Ym', time()) == date('Ym', $i)) 
+		$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
+	else 
+		$sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
 	if ($k == 6){
 		$k = -1;
 		$aPage['planer_content'] .= '<tr>'. $sField .'</tr>';
-		$sField = '';
-		$sChecked = '';
+		$sField = $sChecked = '';
 	}
 }
 $aPage['planer_content'] .= '</tbody>';
