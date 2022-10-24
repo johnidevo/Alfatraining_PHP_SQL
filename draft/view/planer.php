@@ -6,17 +6,17 @@
 
 global $aPage;
 $aPage = array();
-$aPage['content'] = $aPage['planer'] = '';
+$aPage['content'] = $aPage['planer_content'] = $aPage['planer_sidebar'] = '';
 
 $aPage['title'] = 'Terminplaner';
 
-
+/* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
-$aPage['planer'] .= '<form action="/?page=planer" method="post"><table>';
-$aPage['planer'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
+$aPage['planer_content'] .= '<table>';
+$aPage['planer_content'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
@@ -25,7 +25,7 @@ $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 $iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
 
-$aPage['planer'] .= '<tbody>';
+$aPage['planer_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
@@ -34,14 +34,19 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 	else $sField .= '<td>'. html_planer_radio(date('d', $i)) .'</b></td>';
 	if ($k == 6){
 		$k = -1;
-		$aPage['planer'] .= '<tr>'. $sField .'</tr>';
+		$aPage['planer_content'] .= '<tr>'. $sField .'</tr>';
 		$sField = '';
 	}
 }
-$aPage['planer'] .= '</tbody>';
-$aPage['planer'] .= '</table></form>';
+$aPage['planer_content'] .= '</tbody>';
+$aPage['planer_content'] .= '</table>';
 
+/* Sidebar */
+$aPage['planer_sidebar'] .= '<thead><tr><td></td>Besprechungsstunde</tr></thead>';
 
+$aPage['planer_sidebar'] .= '<input type="submit" value="Einreichen">';
+$aPage['planer_sidebar'] .= '</table>';
+	
 
 /*
     <label for="peas">Do you like peas?</label>
@@ -54,15 +59,18 @@ $aPage['planer'] .= '</table></form>';
 */
 $aPage['content'] .= '<main>
 	<div class="container">
-		<div id="content">
-			<h3>Terminplaner</h3>
-			<hr></br>
-			'. $aPage['planer'] .'
-		</div>
-		<div id="sidebar">
-		
-			<h3></h3>
-		</div>
+		<form action="/?page=planer" method="post">
+			<div id="content">
+				<h3>Terminplaner</h3>
+				<hr></br>
+				'. $aPage['planer_content'] .'
+			</div>
+			<div id="sidebar">
+				<h3>Stunden auswählen</h3>
+				<hr></br>
+				'. $aPage['planer_sidebar'] .'
+			</div>
+		</form>
 	</div>
 </main>';
 

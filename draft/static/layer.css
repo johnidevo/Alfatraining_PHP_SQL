@@ -53,7 +53,6 @@ main #sidebar {
 }
 
 main #content { 
-	color: red;
 	float: right;
 	width: 760px;
 	margin: 20px;

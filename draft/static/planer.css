@@ -10,5 +10,7 @@ main #sidebar {
 }
 
 main #content {
-	float: left !important;
+	float: left !important;;
+	width: 720px !important;
+	padding: 20px !important;
 }
