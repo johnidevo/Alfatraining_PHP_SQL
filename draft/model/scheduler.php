@@ -35,7 +35,7 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	$sQuery = "SELECT * FROM `appointments` where date >= ". strtotime(date('Ym', time())) .";";
+	$sQuery = "SELECT * FROM `appointments` where `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) .";";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }

@@ -8,6 +8,13 @@ global $aPage, $aResults, $aScheduler;
 $aPage = array();
 $aPage['content'] = $aPage['scheduler_content'] = $aPage['scheduler_sidebar'] = '';
 $aPage['title'] = 'Scheduler liste';
+$aColors = array(
+	array('#000', '#febc56'), 
+	array('#000', '#8cc63f'), 
+	array('#fff', '#0071bc'), 
+	array('#fff', '#93005d'), 
+	array('#fff', '#662d91')
+);
 
 /* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
@@ -31,18 +38,19 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
 	#if (date('m', time()) == date('m', $i))
 	$aAppointments = array();
+
 	foreach($aResults as $aDataDate)
 	{
-		var_dump($aDataDate);
-		if (date('Ymd', time()) == date('Ymd', $aDataDate['date']))
+		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
 		{
-			$sAppointment = '<a href="/'. $aDataDate['id'] .'">'. $aDataDate['date'] .'</a>';
+			$iKeyColor = array_rand($aColors);
+			$sAppointment = '<a style="background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] 
+				.'" href="/'. $aDataDate['id'] .'">'. $aDataDate['date'] .'</a>';
 			array_push($aAppointments, $sAppointment);
 		}
 	}
-	#var_dump($aAppointments);
 	$sField .= '<td>';
-	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>a';
+	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
 	$sField .= implode(PHP_EOL, $aAppointments);
 	$sField .= '</td>';
 	
