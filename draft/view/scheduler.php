@@ -4,11 +4,10 @@
 #set data variable for javascript if needed
 #
 
-global $aPage;
+global $aPage, $aResults, $aScheduler;
 $aPage = array();
 $aPage['content'] = $aPage['scheduler_content'] = $aPage['scheduler_sidebar'] = '';
 $aPage['title'] = 'Scheduler liste';
-
 
 /* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
@@ -16,7 +15,8 @@ $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $aPage['scheduler_content'] .= '<table>';
-$aPage['scheduler_content'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
+$aPage['scheduler_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
+$aPage['scheduler_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
@@ -29,9 +29,23 @@ $aPage['scheduler_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
-	if (date('m', time()) == date('m', $i)) 
-	$sField .= '<td><b>'. html_scheduler_radio_day(date('d', $i), $i) .'</b></td>';
-	else $sField .= '<td>'. html_scheduler_radio_day(date('d', $i), $i) .'</b></td>';
+	#if (date('m', time()) == date('m', $i))
+	$aAppointments = array();
+	foreach($aResults as $aDataDate)
+	{
+		var_dump($aDataDate);
+		if (date('Ymd', time()) == date('Ymd', $aDataDate['date']))
+		{
+			$sAppointment = '<a href="/'. $aDataDate['id'] .'">'. $aDataDate['date'] .'</a>';
+			array_push($aAppointments, $sAppointment);
+		}
+	}
+	#var_dump($aAppointments);
+	$sField .= '<td>';
+	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>a';
+	$sField .= implode(PHP_EOL, $aAppointments);
+	$sField .= '</td>';
+	
 	if ($k == 6){
 		$k = -1;
 		$aPage['scheduler_content'] .= '<tr>'. $sField .'</tr>';
@@ -55,11 +69,12 @@ $aPage['content'] .= '
 	</form>
 ';
 
-function html_scheduler_radio_day($sName, $iValue){
+function html_scheduler_label_day($sName, $iValue){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';
 }
 
 
-
+#var_dump($aResults);
+#var_dump($aResults);
 
 ?>

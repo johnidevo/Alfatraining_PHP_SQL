@@ -2,6 +2,7 @@
 
 
 global $aScheduler;
+$aScheduler = array();
 
 function scheduler_init()
 {
@@ -34,9 +35,8 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	$sQuery = "SELECT * FROM `appointments`";
+	$sQuery = "SELECT * FROM `appointments` where date >= ". strtotime(date('Ym', time())) .";";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
-	var_dump($aResults);
 	return true;
 }
 

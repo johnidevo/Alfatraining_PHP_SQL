@@ -16,7 +16,8 @@ $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $aPage['planer_content'] .= '<table>';
-$aPage['planer_content'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
+$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
+$aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
@@ -59,6 +60,8 @@ $aPage['planer_sidebar'] .= '</table>';
 /*
 10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
 		mit einer Anzeige.		
+15 P	6. Daten einfügen: Erstellen Sie ein Formular zum Erstellen 
+		von neuen Terminen und speichern Sie den Termin in der Datenbank.		
 */
 $aPage['content'] .= '
 	<form action="/?'. http_build_query($aRouter) .'" method="post">

@@ -18,9 +18,7 @@ function frontend_init()
 function frontend_sql_open()
 {
 	global $oMysql, $sQuery, $aResults;
-
 	$oMysql = mysqli_connect(DB_SERVER, DB_USER, DB_PASS, DB_NAME);
-	
 	return true;
 }
 
