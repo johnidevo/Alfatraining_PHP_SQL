@@ -7,6 +7,7 @@ define('DB_PASS', '');
 define('DB_NAME', 'calendar');
 
 global $oMysql, $sQuery, $aResults, $bResult;
+$aResults = array();
 
 function frontend_init()
 {
@@ -38,6 +39,13 @@ function frontend_sql_fetch()
 	return true;
 }
 
+function frontend_sql_fetch_assoc()
+{
+	global $oMysql, $sQuery, $aResults;
+	$aResult = mysqli_query($oMysql, $sQuery);
+	while ($row = mysqli_fetch_array($aResult, MYSQLI_ASSOC)) array_push($aResults, $row);
+	return true;
+}
 
 
 /*

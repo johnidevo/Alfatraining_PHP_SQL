@@ -19,8 +19,24 @@ function event_clear()
 function event_success($sMessage = 'Success')
 {
 	global $aEvent;
-	#$_SESSION['event'] = $sMessage;
-	$aEvent = $sMessage;
+	$aEvent['message'] = $sMessage;
+	$aEvent['type'] = 'success';
+	return true;
+}
+
+function event_error($sMessage = 'Error')
+{
+	global $aEvent;
+	$aEvent['message'] = $sMessage;
+	$aEvent['type'] = 'error';
+	return true;
+}
+
+function event_warning($sMessage = 'Warrning')
+{
+	global $aEvent;
+	$aEvent['message'] = $sMessage;
+	$aEvent['type'] = 'warrning';
 	return true;
 }
 ?>

@@ -93,8 +93,8 @@ function widget_nav()
 	
 	$aWidget['nav'] .= '<nav class="shadow">
 		<div class="container">
-			<img alt="Suiteziel" id="logo" src="public/suiteziel_ug.svg">
-			<h2>Suite & Ziel <small>Terminplaner</small></h2>
+			<a href="/"><img alt="Suiteziel" id="logo" src="public/suiteziel_ug.svg">
+			<h2>Suite & Ziel <small>Terminplaner</small></h2></a>
 			<ul>'. implode(PHP_EOL, $aWidget['nav_menu']).'</ul>
 		</div>
 	</nav>';
@@ -137,7 +137,7 @@ function widget_event()
 	global $aRouter, $aEvent, $aWidget;
 	$aWidget['events'] = '';
 	if (empty($aEvent)) return true;
-	$aWidget['events'] = '<div id="event"><h3>'. $aEvent .'</h3></div>';
+	$aWidget['events'] = '<div class="'. $aEvent['type'] .'" id="event"><h3>'. $aEvent['message'] .'</h3></div>';
 	if (!event_clear()) error_throw('event_clear()');
 	return true;
 }

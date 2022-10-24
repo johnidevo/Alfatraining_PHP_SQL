@@ -39,6 +39,8 @@ function user_login()
 	
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	setcookie('userlogin', '', time() + 3600);
+	
 	$_SESSION['user'] = $aResults;
 	$aRouter['page'] = 'dashboard';
 	if (!router_redirect()) error_throw('router_redirect()');
@@ -59,6 +61,8 @@ function user_register()
 	
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	setcookie('userlogin', '', time() + 3600);
+	
 	$_SESSION['user'] = $aResults;
 	$aRouter['page'] = 'dashboard';
 	if (!router_redirect()) error_throw('router_redirect()');
@@ -69,6 +73,7 @@ function user_logout()
 {
 	global $aRouter;
 	session_destroy();
+	setcookie('userlogin', '', time() - 3600);
 	$aRouter['page'] = 'redirect';
 	return true;
 }

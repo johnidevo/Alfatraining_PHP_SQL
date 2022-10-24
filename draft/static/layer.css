@@ -89,11 +89,22 @@ nav ul li a {
 }
 
 #event {
-	background-color: #9abf51;
 	padding: 10px 20px 20px 20px;
 	margin: 20px;
 }
 
 #event h3 {
 	color: #fff;
+}
+
+#event.success {
+	background-color: #9abf51;
+}
+
+#event.error {
+	background-color: #ff5670;
+}
+
+#event.warning {
+	background-color: #ff5670;
 }
