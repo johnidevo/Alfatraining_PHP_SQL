@@ -14,7 +14,6 @@ $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
-
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
 $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
@@ -59,6 +58,9 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = $sChecked = '';
 }
+
+var_dump($aScheduler['update']);
+	
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="Einreichen"></td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
