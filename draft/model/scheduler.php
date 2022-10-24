@@ -60,6 +60,7 @@ function scheduler_planer_update()
 	
 	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	$aScheduler['update'] = $aResults;
 	return true;
 }
 
