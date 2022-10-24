@@ -26,12 +26,11 @@ $aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'<
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 
-echo '<pre>';
+#echo '<pre>';
 
 $sField = $sChecked = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
-
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
 /*
@@ -53,9 +52,9 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 		$sField = '';
 	}
 }
-					 
-echo '</pre>';
-					 
+
+#echo '</pre>';
+
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 
