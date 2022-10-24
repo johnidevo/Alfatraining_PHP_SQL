@@ -15,7 +15,7 @@ $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
-$aPage['planer'] .= '<table>';
+$aPage['planer'] .= '<form action="/?page=planer" method="post"><table>';
 $aPage['planer'] .= '<thead><tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
@@ -30,8 +30,8 @@ $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
 	if (date('m', time()) == date('m', $i)) 
-	$sField .= '<td><b>'. date('d', $i) .'</b></td>';
-	else $sField .= '<td>'. date('d', $i) .'</b></td>';
+	$sField .= '<td><b>'. html_planer_radio(date('d', $i)) .'</b></td>';
+	else $sField .= '<td>'. html_planer_radio(date('d', $i)) .'</b></td>';
 	if ($k == 6){
 		$k = -1;
 		$aPage['planer'] .= '<tr>'. $sField .'</tr>';
@@ -39,11 +39,14 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 	}
 }
 $aPage['planer'] .= '</tbody>';
-$aPage['planer'] .= '</table>';
+$aPage['planer'] .= '</table></form>';
 
 
 
-
+/*
+    <label for="peas">Do you like peas?</label>
+    <input type="checkbox" name="peas" id="peas">
+*/
 
 /*
 10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
@@ -63,6 +66,10 @@ $aPage['content'] .= '<main>
 	</div>
 </main>';
 
+function html_planer_radio($i){
+	return '<label for="date_'. $i .'">'. $i .'</label>
+	<input type="radio" name="date_planer" id="date_'. $i .'">';
+}
 
 function planer_init()
 {
