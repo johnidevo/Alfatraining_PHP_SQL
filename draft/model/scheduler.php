@@ -49,7 +49,17 @@ function scheduler_planer_update()
 	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
-	#var_dump('id', $aResults);
+	
+	if (empty($_POST)) return true;
+	if (!isset($_POST['date_planer'])) return event_error();
+	if (!isset($_POST['hour_planer'])) return event_error();
+	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
+	$sQuery = "UPDATE `appointments` SET `date` = '". $iDate ."' WHERE `appointments`.`id` = ". $aRouter['id'] .";";
+	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
+	if (!event_success()) error_throw('event_success()');
+	
+	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	return true;
 }
 
