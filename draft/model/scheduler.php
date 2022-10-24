@@ -22,6 +22,8 @@ function scheduler_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults, $aEvent;
+	if (isset($aRouter['id'])) return scheduler_planer_update();
+	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (empty($_POST)) return true;
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
@@ -41,5 +43,21 @@ function scheduler_list()
 }
 
 
+function scheduler_planer_update()
+{
+	global $aRouter, $sQuery, $aResults, $aScheduler;
+	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	$aScheduler['update'] = $aResults;
+	#var_dump('id', $aResults);
+	return true;
+}
+
+function scheduler_planer_delete()
+{
+	global $aRouter, $sQuery, $aResults, $aEvent;
+
+	return true;
+}
 
 ?>

@@ -4,7 +4,7 @@
 #set data variable for javascript if needed
 #
 
-global $aPage;
+global $aRouter, $aPage;
 $aPage = array();
 $aPage['content'] = $aPage['planer_content'] = $aPage['planer_sidebar'] = '';
 $aPage['title'] = 'Terminplaner';

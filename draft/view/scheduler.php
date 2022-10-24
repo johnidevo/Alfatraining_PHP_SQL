@@ -4,7 +4,7 @@
 #set data variable for javascript if needed
 #
 
-global $aPage, $aResults, $aScheduler;
+global $aRouter, $aPage, $aResults, $aScheduler;
 $aPage = array();
 $aPage['content'] = $aPage['scheduler_content'] = $aPage['scheduler_sidebar'] = '';
 $aPage['title'] = 'Scheduler liste';
@@ -32,23 +32,27 @@ $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 $iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
 
+$aUpdateLink = $aRouter;
+$aUpdateLink['page'] = 'planer';
+
 $aPage['scheduler_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
-	#if (date('m', time()) == date('m', $i))
 	$aAppointments = array();
-
 	foreach($aResults as $aDataDate)
 	{
 		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
 		{
+			$aUpdateLink['id'] = (int)$aDataDate['id'];
 			$iKeyColor = array_rand($aColors);
-			$sAppointment = '<a style="background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] 
-				.'" href="/'. $aDataDate['id'] .'">'. $aDataDate['date'] .'</a>';
+			$sLinkStyle = 'background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] .';';
+			$sAppointment = '<a style="'. $sLinkStyle .'" href="/?'. http_build_query($aUpdateLink) .'">'. date('H:i', $aDataDate['date']) .'</a>';
 			array_push($aAppointments, $sAppointment);
 		}
 	}
+	sort($aAppointments, SORT_LOCALE_STRING);
+	
 	$sField .= '<td>';
 	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
 	$sField .= implode(PHP_EOL, $aAppointments);
@@ -82,7 +86,5 @@ function html_scheduler_label_day($sName, $iValue){
 }
 
 
-#var_dump($aResults);
-#var_dump($aResults);
 
 ?>
