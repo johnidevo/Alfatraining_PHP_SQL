@@ -15,11 +15,11 @@ $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
-$iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
+$iDatePrev = date('w', strtotime(date('Y/m/1 12:00:00', time()) )) - 1;
+$iDateNext = 7 - date('w', strtotime(date('Y/m/t 12:00:00', time() )));
 
-$iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
-$iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
+$iDatePrevTable = strtotime(date('Y/m/1 12:00:00', time()) .' - '. $iDatePrev .' days'); //
+$iDateNextTable = strtotime(date('Y/m/t 12:00:00', time()) .' + '. $iDateNext .' days'); //<<
 
 $aPage['planer_content'] .= '<table>';
 $aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
@@ -29,7 +29,6 @@ $aPage['planer_content'] .= '<tbody>';
 $sField = $sChecked = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
-	
 	if (isset($aScheduler['update']))
 	if (date('Ymd', $aScheduler['update']['date']) == date('Ymd', $i)) $sChecked = 'checked';
 	if (date('Ym', time()) == date('Ym', $i)) 
