@@ -31,7 +31,6 @@ function router_redirect()
 	exit();
 }
 
-
 function router_setup()
 {
 	global $aRouter;

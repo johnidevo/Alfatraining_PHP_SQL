@@ -25,7 +25,7 @@ function widget_init()
 
 function widget_render()
 {
-	global $aWidget;
+	global $aWidget, $aRouter;
 	if (!headers_sent()) {
 		header('Content-Type: text/html; charset=utf-8');
 		print PHP_EOL;
@@ -116,7 +116,9 @@ function widget_nav_menu()
 		if (!isset($_SESSION['user']) && $sLink == 'calendar') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'scheduler') continue;
 		if (isset($_SESSION['user']) && $sLink == 'planer') continue;
-		$sLink = '<li><a class="'. $sSelected .'" href="?page='. $sLink .'">'. $sName .'</a></li>';
+		$aLinks = $aRouter;
+		$aLinks['page'] = $sLink;
+		$sLink = '<li><a class="'. $sSelected .'" href="?'. http_build_query($aLinks) .'">'. $sName .'</a></li>';
 		array_push($aWidget['nav_menu'], $sLink);
 	}
 	return true;
@@ -126,15 +128,13 @@ function widget_nav_theme()
 {
 	global $aRouter, $aWidget;
 	$aWidget['nav_theme'] = '';
-
-	#if ($aRouter['page'] == $sLink) $sSelected = 'selected';
-	
 	return true;
 }
 
 function widget_events()
 {
 	global $aRouter, $aEvent, $aWidget;
+	$aWidget['events'] = '';
 	return true;
 }
 

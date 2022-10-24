@@ -41,6 +41,7 @@ function user_login()
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
 	$aRouter['page'] = 'dashboard';
+	if (!router_redirect()) error_throw('router_redirect()');
 	return true;
 }
 
@@ -60,6 +61,7 @@ function user_register()
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$_SESSION['user'] = $aResults;
 	$aRouter['page'] = 'dashboard';
+	if (!router_redirect()) error_throw('router_redirect()');
 	return true;
 }
 
