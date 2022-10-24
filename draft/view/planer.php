@@ -58,11 +58,12 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = $sChecked = '';
 }
-
-#var_dump($aScheduler['update']);
 	
+if (isset($aScheduler['update'])) $sSubmitValue = 'Aktualisieren';
+else $sSubmitValue = 'Einreichen';
+
 $aPage['planer_content'] .= '</tbody>';
-$aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="Einreichen"></td></tr></tfoot>';
+$aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="'. $sSubmitValue .'"></td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
 
 

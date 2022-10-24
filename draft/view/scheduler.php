@@ -51,7 +51,6 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 			array_push($aAppointments, $sAppointment);
 		}
 	}
-	sort($aAppointments, SORT_LOCALE_STRING);
 	
 	$sField .= '<td>';
 	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';

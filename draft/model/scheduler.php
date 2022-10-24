@@ -34,10 +34,14 @@ function scheduler_planer()
 	return true;
 }
 
+/*
+10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
+		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.	
+*/
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	$sQuery = "SELECT * FROM `appointments` where `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) .";";
+	$sQuery = "SELECT * FROM `appointments` where `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) ." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
