@@ -18,6 +18,7 @@ function router_init()
 {
 	global $aRouter;
 	if (empty($_GET)) return router_redirect();
+	if (!router_setup()) error_throw('router_setup()');
 	$aRouter = array_merge($aRouter, $_GET);
 	return true;
 }
@@ -25,10 +26,20 @@ function router_init()
 function router_redirect()
 {
 	global $aRouter;
-	if (empty($aRouter['page'])) $aRouter['page'] = 'home';
-	header('HTTP/1.1 301 Moved Permanently');
+	if (!router_setup()) error_throw('router_setup()');
 	header('Location: /?'. http_build_query($aRouter));
 	exit();
+}
+
+
+function router_setup()
+{
+	global $aRouter;
+	if (empty($aRouter['page'])) $aRouter['page'] = 'home';
+	if (empty($aRouter['lang'])) $aRouter['lang'] = 'de';
+	if (empty($aRouter['theme'])) $aRouter['theme'] = 'light';
+	$aRouter = array_merge($aRouter, $_GET);
+	return true;
 }
 
 ?>

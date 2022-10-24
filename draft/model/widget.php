@@ -18,9 +18,24 @@ function widget_init()
 	if (!widget_css()) error_throw('widget_css()');
 	if (!widget_nav()) error_throw('widget_nav()');
 	if (!widget_html()) error_throw('widget_html()');
-	
-	print $aWidget['html'];
+	if (!widget_render()) error_throw('widget_render()');
+	#print $aWidget['html'];
 	return true;
+}
+
+function widget_render()
+{
+	global $aWidget;
+	if (!headers_sent()) {
+		header('Content-Type: text/html; charset=utf-8');
+		print PHP_EOL;
+		print $aWidget['html'];
+		exit;
+	}
+	else {
+		print $aWidget['html'];
+		exit;
+	}
 }
 
 function widget_js()
@@ -56,7 +71,10 @@ function widget_css()
 	global $aRouter, $aWidget;
 	if (file_exists(DRAFT .'static/'. $aRouter['page'] .'.css'))
 	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
+	if ($aRouter['theme'] == 'light')
 	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
+	else 
+	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/dark.css">';
 	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
 	return true;
 }
@@ -67,9 +85,25 @@ function widget_css()
 */
 function widget_nav()
 {
-	global $aRouter, $aWidget, $aRouterNav;
+	global $aRouter, $aWidget;
+	if (!widget_nav_menu()) error_throw('widget_nav_menu()');
+	if (!widget_nav_theme()) error_throw('widget_nav_theme()');
 	$aWidget['nav'] = '';
-	$aPagesLinks = array();
+	
+	$aWidget['nav'] .= '<nav class="shadow">
+		<div class="container">
+			<img alt="Suiteziel" id="logo" src="public/suiteziel_ug.svg">
+			<h2>Suite & Ziel <small>Terminplaner</small></h2>
+			<ul>'. implode(PHP_EOL, $aWidget['nav_menu']).'</ul>
+		</div>
+	</nav>';
+	return true;
+}
+
+function widget_nav_menu()
+{
+	global $aRouter, $aWidget, $aRouterNav;
+	$aWidget['nav_menu'] = array();
 	
 	foreach ($aRouterNav as $sLink => $sName) {
 		if ($aRouter['page'] == $sLink) $sSelected = 'selected';
@@ -83,16 +117,18 @@ function widget_nav()
 		if (!isset($_SESSION['user']) && $sLink == 'scheduler') continue;
 		if (isset($_SESSION['user']) && $sLink == 'planer') continue;
 		$sLink = '<li><a class="'. $sSelected .'" href="?page='. $sLink .'">'. $sName .'</a></li>';
-		array_push($aPagesLinks, $sLink);
+		array_push($aWidget['nav_menu'], $sLink);
 	}
+	return true;
+}
+
+function widget_nav_theme()
+{
+	global $aRouter, $aWidget;
+	$aWidget['nav_theme'] = '';
+
+	#if ($aRouter['page'] == $sLink) $sSelected = 'selected';
 	
-	$aWidget['nav'] .= '<nav class="shadow">
-		<div class="container">
-			<img alt="Suiteziel" id="logo" src="public/suiteziel_ug.svg">
-			<h2>Suite & Ziel <small>Terminplaner</small></h2>
-			<ul>'. implode(PHP_EOL, $aPagesLinks).'</ul>
-		</div>
-	</nav>';
 	return true;
 }
 
