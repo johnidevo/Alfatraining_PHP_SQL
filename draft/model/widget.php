@@ -134,8 +134,9 @@ function widget_nav_theme()
 
 function widget_event()
 {
-	global $aRouter, $aEvent, $aWidget; 
-	$aWidget['events'] = '<div class="container"><h3>'. $_SESSION['event'] .'</h3></div>';
+	global $aRouter, $aEvent, $aWidget;
+	$aWidget['events'] = '<div class="container"><h3>'. $aEvent .'</h3></div>';
+	if (!event_clear()) error_throw('event_clear()');
 	return true;
 }
 

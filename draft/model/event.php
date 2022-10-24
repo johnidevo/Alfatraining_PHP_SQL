@@ -6,11 +6,9 @@ global $aEvent;
 function event_init()
 {
 	global $aEvent;
-	$_SESSION['event'] = '';
 	$aEvent = &$_SESSION['event'] ;
 	return true;
 }
-
 
 function event_clear()
 {
@@ -18,4 +16,11 @@ function event_clear()
 	return true;
 }
 
+function event_success($sMessage = 'Success')
+{
+	global $aEvent;
+	$_SESSION['event'] = $sMessage;
+	$aEvent = $sMessage;
+	return true;
+}
 ?>
