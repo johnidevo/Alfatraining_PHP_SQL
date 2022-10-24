@@ -30,8 +30,8 @@ $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
 	if (date('m', time()) == date('m', $i)) 
-	$sField .= '<td><b>'. html_planer_radio(date('d', $i)) .'</b></td>';
-	else $sField .= '<td>'. html_planer_radio(date('d', $i)) .'</b></td>';
+	$sField .= '<td><b>'. html_planer_radio_day(date('d', $i)) .'</b></td>';
+	else $sField .= '<td>'. html_planer_radio_day(date('d', $i)) .'</b></td>';
 	if ($k == 6){
 		$k = -1;
 		$aPage['planer_content'] .= '<tr>'. $sField .'</tr>';
@@ -42,9 +42,20 @@ $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 
 /* Sidebar */
-$aPage['planer_sidebar'] .= '<thead><tr><td></td>Besprechungsstunde</tr></thead>';
+$aPage['planer_sidebar'] .= '<table><thead><tr><td>Besprechungsstunde</td></tr></thead>';
 
-$aPage['planer_sidebar'] .= '<input type="submit" value="Einreichen">';
+$aPage['planer_content'] .= '<tbody>';
+for ($i = 9; $i <= 15; $i++)
+{
+	$sField .= '<td>'. html_planer_radio_hour($i) .'</b></td>';
+	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
+	$sField = '';
+}
+
+$aPage['planer_content'] .= '</tbody>';
+
+
+$aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="Einreichen"></td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
 	
 
@@ -59,7 +70,7 @@ $aPage['planer_sidebar'] .= '</table>';
 */
 $aPage['content'] .= '<main>
 	<div class="container">
-		<form action="/?page=planer" method="post">
+		<form action="/?'. http_build_query($aRouter) .'" method="post">
 			<div id="content">
 				<h3>Terminplaner</h3>
 				<hr></br>
@@ -74,9 +85,14 @@ $aPage['content'] .= '<main>
 	</div>
 </main>';
 
-function html_planer_radio($i){
+function html_planer_radio_day($i){
 	return '<label for="date_'. $i .'">'. $i .'</label>
 	<input type="radio" name="date_planer" id="date_'. $i .'">';
+}
+
+function html_planer_radio_hour($i){
+	return '<input type="radio" name="hour_planer" id="hour_'. $i .'">
+	<label for="hour_'. $i .'">'. str_pad($i, 2, 0, STR_PAD_LEFT) .':00</label>';
 }
 
 function planer_init()
@@ -84,6 +100,7 @@ function planer_init()
 	#global $sPage;
 	return true;
 }
+
 
 
 ?>

@@ -1,27 +1,26 @@
 <?php
 
 
-global $sKey;
-$sKey = "AIzaSyBQnsqFY61VFgaOm1sdsRh_xlTIEwsyflI";
+global $aScheduler;
 
-function init_services(){
-	global $sKey;
-	$client = new \Google\Client();
-	$client->setApplicationName("PHP/MySQL");
-	$client->setDeveloperKey($sKey);
-	$service = new \Google\Service\YouTube($client);
-	return $service;
+function user_init()
+{
+	global $aRouter;
+	switch($aRouter['page'])
+	{
+		case 'planer':
+			if (!scheduler_planer()) error_throw('scheduler_planer()');
+		break;
+	}
+	return true;
+}
+
+function scheduler_planer()
+{
+	global $aRouter, $sQuery, $aResults;
+	
+	return true;
 }
 
 
-function dump($s) {
-	print '<pre>';
-	var_dump($s);
-	print '</pre>';
-}
-
-
-#var_dump(init_services());
 ?>
-
-
