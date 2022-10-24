@@ -7,8 +7,8 @@
 global $aPage;
 $aPage = array();
 $aPage['content'] = $aPage['planer_content'] = $aPage['planer_sidebar'] = '';
-
 $aPage['title'] = 'Terminplaner';
+
 
 /* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
@@ -30,8 +30,8 @@ $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
 	if (date('m', time()) == date('m', $i)) 
-	$sField .= '<td><b>'. html_planer_radio_day(date('d', $i)) .'</b></td>';
-	else $sField .= '<td>'. html_planer_radio_day(date('d', $i)) .'</b></td>';
+	$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i) .'</b></td>';
+	else $sField .= '<td>'. html_planer_radio_day(date('d', $i), $i) .'</b></td>';
 	if ($k == 6){
 		$k = -1;
 		$aPage['planer_content'] .= '<tr>'. $sField .'</tr>';
@@ -41,9 +41,9 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 
+
 /* Sidebar */
 $aPage['planer_sidebar'] .= '<table><thead><tr><td>Besprechungsstunde</td></tr></thead>';
-
 $aPage['planer_content'] .= '<tbody>';
 for ($i = 9; $i <= 15; $i++)
 {
@@ -51,18 +51,10 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = '';
 }
-
 $aPage['planer_content'] .= '</tbody>';
-
-
 $aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="Einreichen"></td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
-	
 
-/*
-    <label for="peas">Do you like peas?</label>
-    <input type="checkbox" name="peas" id="peas">
-*/
 
 /*
 10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
@@ -85,19 +77,19 @@ $aPage['content'] .= '<main>
 	</div>
 </main>';
 
-function html_planer_radio_day($i){
-	return '<label for="date_'. $i .'">'. $i .'</label>
-	<input value="'. $i .'" type="radio" name="date_planer" id="date_'. $i .'">';
+function html_planer_radio_day($sName, $iValue){
+	return '<label for="date_'. $sName .'">'. $sName .'</label>
+	<input value="'. $iValue .'" type="radio" name="date_planer" id="date_'. $sName .'">';
 }
 
 function html_planer_radio_hour($i){
-	return '<input value="'. $i .'" type="radio" name="hour_planer" id="hour_'. $i .'">
+	return '<input value="'. str_pad($i, 2, 0, STR_PAD_LEFT) .':00:00" type="radio" name="hour_planer" id="hour_'. $i .'">
 	<label for="hour_'. $i .'">'. str_pad($i, 2, 0, STR_PAD_LEFT) .':00</label>';
 }
 
 function planer_init()
 {
-	#global $sPage;
+	global $sPage;
 	return true;
 }
 

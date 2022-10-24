@@ -17,6 +17,7 @@ function widget_init()
 	if (!widget_js()) error_throw('widget_js()');
 	if (!widget_css()) error_throw('widget_css()');
 	if (!widget_nav()) error_throw('widget_nav()');
+	if (!widget_event()) error_throw('widget_event()');
 	if (!widget_html()) error_throw('widget_html()');
 	if (!widget_render()) error_throw('widget_render()');
 	#print $aWidget['html'];
@@ -131,13 +132,12 @@ function widget_nav_theme()
 	return true;
 }
 
-function widget_events()
+function widget_event()
 {
-	global $aRouter, $aEvent, $aWidget;
-	$aWidget['events'] = '';
+	global $aRouter, $aEvent, $aWidget; 
+	$aWidget['events'] = '<div class="container"><h3>'. $_SESSION['event'] .'</h3></div>';
 	return true;
 }
-
 
 function widget_html()
 {
@@ -160,6 +160,9 @@ function widget_html()
 	$aWidget['html'] .= '<!--- body -->';
 	$aWidget['html'] .= '<body>';
 	$aWidget['html'] .= $aWidget['nav'];
+	
+	$aWidget['html'] .= $aWidget['events'];
+	
 	$aWidget['html'] .= $aPage['content'];
 	$aWidget['html'] .= implode(PHP_EOL, $aWidget['script']);
 	$aWidget['html'] .= '</body>';

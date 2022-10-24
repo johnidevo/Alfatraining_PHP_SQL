@@ -18,7 +18,10 @@ function scheduler_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults;
-	var_dump($_POST);
+	if (!isset($_POST['date_planer']) or !isset($_POST['hour_planer'])) return true;
+	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
+	$sQuery = "INSERT INTO `appointments` (`id`, `date`) VALUES (NULL, '". $iDate ."');";
+	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	return true;
 }
 
