@@ -74,7 +74,11 @@ function user_logout()
 function user_verify()
 {
 	global $aRouter;
-	if (isset($_SESSION['user'])) return false;
+	if (isset($_SESSION['user']))
+	{
+		$aRouter['page'] = 'dashboard';
+		return false;
+	}
 	return true;
 }
 
