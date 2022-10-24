@@ -42,8 +42,8 @@ $aPage['scheduler_content'] .= '</tbody>';
 $aPage['scheduler_content'] .= '</table>';
 
 /*
-10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
-		mit einer Anzeige.		
+10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
+		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.		
 */
 $aPage['content'] .= '
 	<form action="/?'. http_build_query($aRouter) .'" method="post">
