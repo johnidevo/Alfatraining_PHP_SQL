@@ -22,18 +22,37 @@ $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
 $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 
-$iDatePrevTable = date('Y-m-d', strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days')); //<<
-$iDateNextTable = date('Y-m-d', strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days')); //<<
+$iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
+$iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
+
 
 echo '<pre>';
+$iDatePrevStart = date('Y-m-d H:i:s', $iDatePrevTable);
+$iDateNextStart = date('Y-m-d H:i:s', $iDateNextTable);
 #var_dump(['$iDateNow', date('w'), '$iDatePrev', date('Y-m-t', time()), '$iDateNext', date('Y-m-01 H:i:s')]);
 #var_dump(['$iDatePrevTable', $iDatePrevTable, '$iDateNextTable', $iDateNextTable]);
 #var_dump(['$iDateNow', $iDateNow, '$iDatePrev', $iDatePrev, '$iDateNext', $iDateNext]);
-echo '</pre>';
+var_dump(array($iDatePrevStart, $iDateNextStart));
+var_dump(($iDateNextTable - $iDatePrevTable) /60/60);
 
 
-#for ($i = date('w'); ){}
+$aPage['planer'] .= '<tbody>';
+$sField = '';
+for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
+{
+  #var_dump([date( 'Y-m-d H:i:s', $i), $k]);
+
+	$sField .= '<td>'. date('d', $i) .'</td>';
 	
+	if ($k == 6)
+	{
+		$k = -1;
+		$aPage['planer'] .= '<tr>'. $sField .'</tr>';
+		$sField = '';
+	}
+}
+$aPage['planer'] .= '</tbody>';
+echo '</pre>';
 /*
 <thead>
 <tr>
