@@ -32,7 +32,7 @@ $iDateMonth = date('n', $sUserSelection);
 $aSelectOptions = array();
 for ($i = $iDateMonth, $j = 0; $j <= 12; $i++, $j++)
 {
-	if ($j == 0) $iSelectYear = (int) date('Y', time());
+	if ($j == 0) $iSelectYear = (int) date('Y', $sUserSelection);
 	$iSelectMonth = str_pad($i, 2, 0, STR_PAD_LEFT);
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
 	if ($i == 12) $i = 0; 
