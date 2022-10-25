@@ -16,51 +16,7 @@ $aColors = array(
 	array('#fff', '#662d91')
 );
 
-if (!isset($aRouter['date'])) $sUserSelection = time();
-else $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
-$iDateMonth = date('n', time());
-$aSelectOptions = array();
-for ($i = $iDateMonth, $j = 0; $j <= 11; $i++, $j++)
-{
-	if ($j == 0) $iSelectYear = (int) date('Y', time());
-	$iSelectMonth = str_pad($i, 2, 0, STR_PAD_LEFT);
-	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
-	if ($i == 12) $i = 0; 
-	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
-	else $sSelected = '';
-	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
-	array_push($aSelectOptions, $sOption);
-}
-
-# Content 
-$aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
-$sTableHeaderContent = array();
-foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
-
-$iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
-$iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
-
-$iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
-$iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
-
-$aPage['scheduler_content'] .= '<table>';
-$aPage['scheduler_content'] .= '<thead>';
-$aPage['scheduler_content'] .= '<tr><th colspan="3">';
-$aPage['scheduler_content'] .= '<label for="suche_date">Wählen einen Monat aus:</label>';
-$aPage['scheduler_content'] .= '<select name="date">'. implode('', $aSelectOptions) .'</select>';
-$aPage['scheduler_content'] .= '</th>';
-$aPage['scheduler_content'] .= '<th colspan="4">';
-$aPage['scheduler_content'] .= '<label for=""><br/></label>';
-$aPage['scheduler_content'] .= '<input type="submit" value="Vorlegen" />';
-$aPage['scheduler_content'] .= '</th></tr>';
-$aPage['scheduler_content'] .= '<tr><th colspan="7">'. date('F', $sUserSelection) .'</th></tr>';
-$aPage['scheduler_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
-$aPage['scheduler_content'] .= '<tbody>';
-
-/*
-# Content
+/* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
@@ -75,12 +31,11 @@ $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 
 $iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
-*/
-
 
 $aUpdateLink = $aRouter;
 $aUpdateLink['page'] = 'planer';
-#$aPage['scheduler_content'] .= '<tbody>';
+
+$aPage['scheduler_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
@@ -108,11 +63,6 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 		$sField = '';
 	}
 }
-$aPage['scheduler_content'] .= '<tfoot><tr><td colspan="1">';
-$aPage['scheduler_content'] .= '' .PHP_EOL;
-$aPage['scheduler_content'] .= '</td><td colspan="5"></td><td colspan="1">';
-$aPage['scheduler_content'] .= '' .PHP_EOL;
-$aPage['scheduler_content'] .= '</td></tr></tfoot>';
 $aPage['scheduler_content'] .= '</tbody>';
 $aPage['scheduler_content'] .= '</table>';
 
