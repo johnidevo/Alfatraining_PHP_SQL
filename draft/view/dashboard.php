@@ -8,27 +8,27 @@ global $aPage;
 $aPage = array();
 $aPage['content'] = $aPage['script'] = $aPage['projekt'] = '';
 
-$aPage['title'] = 'Dashboard';
+$aPage['title'] = '🔆 Dashboard';
 #✅❎❤️‍🩹🔱🔆
 $aPage['projekt'] = <<<END
 <br/>🩹Projekt: Terminplaner
 <br/>
-<br/>Start: 24.10.2022
-<br/>Ende: 28.10.2022
+<br/>🕐 Start: 24.10.2022
+<br/>🕤 Ende: 28.10.2022
 <br/>
-<br/>Erstellen Sie eine Internetseite mit einem Terminplaner.
+<br/>📢 Erstellen Sie eine Internetseite mit einem Terminplaner.
 <br/>
-<br/>Das Projekt soll folgende Features enthalten:
+<br/>💲 Das Projekt soll folgende Features enthalten:
 <br/>
-<br/>🔱- Die Daten werden in einer Datenbank gespeichert
-<br/>🔱- Ein externer Bereich (ohne Loginschutz)
-<br/>🔱- Ein interner Bereich (über Login geschützt)	
-<br/>🔱- Termine in einer Übersicht darstellen
-<br/>🔱- Termine einzeln in einer Detailansicht darstellen
-<br/>🔱- Neue Termine erstellen
-<br/>🔱- Termine suchen	
-<br/>🔱- Termine bearbeiten
-<br/>🔱- Termine löschen
+<br/>🔱 Die Daten werden in einer Datenbank gespeichert
+<br/>🔱 Ein externer Bereich (ohne Loginschutz)
+<br/>🔱 Ein interner Bereich (über Login geschützt)	
+<br/>🔱 Termine in einer Übersicht darstellen
+<br/>🔱 Termine einzeln in einer Detailansicht darstellen
+<br/>🔱 Neue Termine erstellen
+<br/>🔱 Termine suchen	
+<br/>🔱 Termine bearbeiten
+<br/>🔱 Termine löschen
 <br/>
 <br/>🩹 Hilfsmittel:
 <br/>❤️‍Kursunterlagen, Bücher, Internetrecherche, Onlinedokumentationen
@@ -83,7 +83,7 @@ $aPage['content'] .= '
 	<div id="sidebar">
 	</div>
 	<div id="content">
-		<h3>Dashboard</h3>
+		<h3>🔆 Dashboard</h3>
 		<hr></br>
 		'. $aPage['projekt'] .'
 	</div>
