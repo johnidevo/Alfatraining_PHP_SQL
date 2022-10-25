@@ -30,25 +30,17 @@ echo '</pre>';
 
 $iDateMonth = date('n', time());
 $aSelectOptions = array();
-for ($i = $iDateMonth, $j = 0; $j <= 12; $i++, $j++)
+for ($i = $iDateMonth, $j = 0; $j <= 11; $i++, $j++)
 {
 	if ($j == 0) $iSelectYear = (int) date('Y', time());
-	
 	$iSelectMonth = str_pad($i, 2, 0, STR_PAD_LEFT);
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
-	
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-	
 	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
 	else $sSelected = '';
-	
 	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
 	array_push($aSelectOptions, $sOption);
-	
-#echo '<pre>';
-#var_dump(array('$i', $i, '$j', $j));
-#echo '</pre>';
 }
 
 /* Content */
@@ -78,6 +70,7 @@ $aPage['calendar_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr><
 $aPage['calendar_content'] .= '<tbody>';
 
 $sField = $sChecked = '';
+$iEndMonth = 0;
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	if (isset($aScheduler['update']))
@@ -92,6 +85,7 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 		$aPage['calendar_content'] .= '<tr>'. $sField .'</tr>';
 		$sField = '';
 	}
+	$iEndMonth = $iEndMonth + 1;
 }
 
 $aPage['calendar_content'] .= '<tfoot><tr><td colspan="1">';
@@ -99,7 +93,6 @@ $aPage['calendar_content'] .= '' .PHP_EOL;
 $aPage['calendar_content'] .= '</td><td colspan="5"></td><td colspan="1">';
 $aPage['calendar_content'] .= '' .PHP_EOL;
 $aPage['calendar_content'] .= '</td></tr></tfoot>';
-
 $aPage['calendar_content'] .= '</tbody>';
 $aPage['calendar_content'] .= '</table>';
 
@@ -116,7 +109,7 @@ $aPage['content'] .= '
 	</div>
 ';
 
-var_dump($aResults);
+#var_dump($aResults);
 
 function html_planer_radio_day($sName, $iValue, $sChecked = ''){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';
