@@ -39,10 +39,12 @@ function user_login()
 	
 	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	if (is_null($aResults))
+	{
+		if (!event_error()) error_throw('event_error()'); 
+		return true;
+	}
 	setcookie('userlogin', '', time() + 3600);
-	var_dump($aResults);
-	
-	if (!event_error()) error_throw('event_error()');
 	$_SESSION['user'] = $aResults;
 	$aRouter['page'] = 'dashboard';
 	if (!router_redirect()) error_throw('router_redirect()');
