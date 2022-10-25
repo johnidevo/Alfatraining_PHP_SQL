@@ -15,8 +15,8 @@ function scheduler_init()
 		case 'scheduler':
 			if (!scheduler_list()) error_throw('scheduler_list()');
 		break;
-		case 'calendar':
-			if (!calendar_list()) error_throw('scheduler_list()');
+		case 'suche':
+			if (!suche_list()) error_throw('scheduler_list()');
 		break;
 	}
 	return true;
@@ -41,7 +41,6 @@ function scheduler_planer()
 10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
 		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.	
 */
-/*
 function scheduler_list()
 {
 	global $sQuery, $aResults;
@@ -51,7 +50,6 @@ function scheduler_list()
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
-*/
 
 
 function scheduler_planer_update()
@@ -88,7 +86,7 @@ function scheduler_planer_delete()
 	return true;
 }
 
-function scheduler_list()
+function suche_list()
 {
 	global $aRouter, $sQuery, $aResults;
 	if (empty($_POST['date'])) return true;

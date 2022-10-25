@@ -9,7 +9,7 @@ $aRouterNav = array(
 	'planer' => 'Planer',
 	'login' => 'Login',
 	'register' => 'Register',
-	'calendar' => 'Suche',
+	'suche' => 'Suche',
 	'scheduler' => 'Scheduler',
 	'logout' => 'Logout'
 );
