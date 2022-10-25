@@ -15,6 +15,9 @@ function scheduler_init()
 		case 'scheduler':
 			if (!scheduler_list()) error_throw('scheduler_list()');
 		break;
+		case 'calendar':
+			if (!calendar_list()) error_throw('scheduler_list()');
+		break;
 	}
 	return true;
 }
@@ -80,6 +83,18 @@ function scheduler_planer_delete()
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	unset($aRouter['delete']);
 	if (!event_success()) error_throw('event_success()');
+	return true;
+}
+
+function calendar_list()
+{
+	global $sQuery, $aResults;
+	if (empty($_GET)) return true;
+	var_dump($_GET);
+	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
+		. strtotime(date('Ym01', strtotime(time() .'-1 week') )) 
+		." ORDER BY date ASC;";
+	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
 

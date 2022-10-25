@@ -32,14 +32,6 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
-/*
-	var_dump([
-		date('Y-m-d', $aScheduler['update']['date']), 
-		date('Y-m-d', $i),
-		date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i),
-		$sChecked
-	]);
-*/
 	if (date('Ym', time()) == date('Ym', $i)) 
 		$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
 	else 
