@@ -8,6 +8,13 @@ global $aPage, $aRouter, $aResults;
 $aPage = array();
 $aPage['content'] = $aPage['script'] = $aPage['calendar_content'] = '';
 $aPage['title'] = 'Suche';
+$aColors = array(
+	array('#000', '#febc56'), 
+	array('#000', '#8cc63f'), 
+	array('#fff', '#0071bc'), 
+	array('#fff', '#93005d'), 
+	array('#fff', '#662d91')
+);
 
 if (!isset($aRouter['date'])) $sUserSelection = time();
 else $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
@@ -69,16 +76,50 @@ $aPage['calendar_content'] .= '<tr><th colspan="7">'. date('F', $sUserSelection)
 $aPage['calendar_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['calendar_content'] .= '<tbody>';
 
+/*
+	$aAppointments = array();
+	foreach($aResults as $aDataDate)
+	{
+		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
+		{
+			$aUpdateLink['id'] = (int)$aDataDate['id'];
+			$iKeyColor = array_rand($aColors);
+			$sLinkStyle = 'background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] .';';
+			$sAppointment = '<a style="'. $sLinkStyle .'" href="/?'. http_build_query($aUpdateLink) .'">'. date('H:i', $aDataDate['date']) .'</a>';
+			array_push($aAppointments, $sAppointment);
+		}
+	}
+	
+	$sField .= '<td>';
+	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
+	$sField .= implode(PHP_EOL, $aAppointments);
+	$sField .= '</td>';
+*/
 $sField = $sChecked = '';
 $iEndMonth = 0;
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
+	
+	$aAppointments = array();
+	foreach($aResults as $aDataDate)
+	{
+		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
+		{
+			$aUpdateLink['id'] = (int)$aDataDate['id'];
+			$iKeyColor = array_rand($aColors);
+			$sLinkStyle = 'background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] .';';
+			$sAppointment = '<a style="'. $sLinkStyle .'" href="/?'. http_build_query($aUpdateLink) .'">'. date('H:i', $aDataDate['date']) .'</a>';
+			array_push($aAppointments, $sAppointment);
+		}
+	}
+	
 	if (date('Ym', $sUserSelection) == date('Ym', $i)) 
-		$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
+		$sField .= '<td><b>'. html_planer_label_day(date('d', $i), $i, $sChecked) 
+			.'<br/>'. implode(PHP_EOL, $aAppointments) .'</b></td>';
 	else 
-		$sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
+		$sField .= '<td>'. html_planer_label_day(date('d', $i), $i, $sChecked) .'</td>';
 	$sChecked = '';
 	if ($k == 6){
 		$k = -1;
@@ -111,7 +152,7 @@ $aPage['content'] .= '
 
 #var_dump($aResults);
 
-function html_planer_radio_day($sName, $iValue, $sChecked = ''){
+function html_planer_label_day($sName, $iValue, $sChecked = ''){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';
 }
 
