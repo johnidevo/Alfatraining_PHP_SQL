@@ -9,7 +9,8 @@ $aPage = array();
 $aPage['content'] = $aPage['script'] = '';
 $aPage['title'] = 'Suche';
 
-$iDateCurrentMonth = date('n', time());
+if (isset($aRouter['date'])) $iDateCurrentMonth = date('n', $aRouter['date'] .'01 12:00:00');
+else $iDateCurrentMonth = date('n', time());
 $aSelectOptions = array();
 for ($i = $iDateCurrentMonth, $j = 0; $j <= 12; $i++, $j++)
 {
@@ -18,7 +19,9 @@ for ($i = $iDateCurrentMonth, $j = 0; $j <= 12; $i++, $j++)
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'">'. $iSelectYear .' - '. $sSelectMonth .'</option>';
+	if ($aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
+	else $sSelected = '';
+	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
 	array_push($aSelectOptions, $sOption);
 }
 
@@ -82,13 +85,13 @@ $aPage['content'] .= '
 	<div id="content">
 		<h3>Suche</h3>
 		<hr></br>
-		<form action="/?'. http_build_query($aRouter) .'" method="get">
+		<form action="/?'. http_build_query($aRouter) .'" method="post">
 			'. $aPage['calendar_content'] .'
 		</form>
 	</div>
 ';
 
-var_dump($aResults);
+#var_dump($aResults);
 
 function html_planer_radio_day($sName, $iValue, $sChecked = ''){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';

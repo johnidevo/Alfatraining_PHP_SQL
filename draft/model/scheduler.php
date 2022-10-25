@@ -88,11 +88,11 @@ function scheduler_planer_delete()
 
 function calendar_list()
 {
-	global $sQuery, $aResults;
-	if (empty($_GET)) return true;
-	var_dump($_GET);
+	global $aRouter, $sQuery, $aResults;
+	if (empty($_POST['date'])) return true;
+	$aRouter['date'] = $_POST['date'];
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
-		. strtotime(date('Ym01', strtotime(time() .'-1 week') )) 
+		. strtotime( date('Ym01', strtotime($_POST['date'] .'01 12:00:00')) )
 		." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
