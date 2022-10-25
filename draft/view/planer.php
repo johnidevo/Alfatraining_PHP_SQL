@@ -27,7 +27,6 @@ $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></t
 $aPage['planer_content'] .= '<tbody>';
 
 #echo '<pre>';
-
 $sField = $sChecked = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
@@ -54,9 +53,9 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 }
 
 $aPage['planer_content'] .= '<tfoot><tr><td colspan="1">';
-$aPage['planer_content'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
+$aPage['planer_content'] .= '' .PHP_EOL;
 $aPage['planer_content'] .= '</td><td colspan="5"></td><td colspan="1">';
-$aPage['planer_content'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
+$aPage['planer_content'] .= '' .PHP_EOL;
 $aPage['planer_content'] .= '</td></tr></tfoot>';
 
 $aPage['planer_content'] .= '</tbody>';
