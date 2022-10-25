@@ -28,19 +28,27 @@ var_dump(array(
 echo '</pre>';
 */
 
-$iDateMonth = date('n', $sUserSelection);
+$iDateMonth = date('n', time());
 $aSelectOptions = array();
 for ($i = $iDateMonth, $j = 0; $j <= 12; $i++, $j++)
 {
-	if ($j == 0) $iSelectYear = (int) date('Y', $sUserSelection);
+	if ($j == 0) $iSelectYear = (int) date('Y', time());
+	
 	$iSelectMonth = str_pad($i, 2, 0, STR_PAD_LEFT);
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
+	
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
+	
 	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
 	else $sSelected = '';
+	
 	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
 	array_push($aSelectOptions, $sOption);
+	
+#echo '<pre>';
+#var_dump(array('$i', $i, '$j', $j));
+#echo '</pre>';
 }
 
 /* Content */
