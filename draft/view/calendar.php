@@ -9,8 +9,24 @@ $aPage = array();
 $aPage['content'] = $aPage['script'] = $aPage['calendar_content'] = '';
 $aPage['title'] = 'Suche';
 
-if (isset($aRouter['date'])) $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
-$sUserSelection = time();
+if (!isset($aRouter['date'])) $sUserSelection = time();
+else $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
+
+/*
+echo '<pre>';
+var_dump(array(
+	date('Ymd', strtotime($aRouter['date'] .'01 12:00:00')),
+	$aRouter['date'] .'01 12:00:00',
+	$aRouter['date'],
+	$sUserSelection,
+	date('Ymd', $sUserSelection),
+	date('Y-m-01', $sUserSelection),
+	$aRouter['date'],
+	isset($aRouter['date']),
+	$sUserSelection
+));	
+echo '</pre>';
+*/
 
 $iDateMonth = date('n', $sUserSelection);
 $aSelectOptions = array();
@@ -21,21 +37,6 @@ for ($i = $iDateMonth, $j = 0; $j <= 12; $i++, $j++)
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-
-echo '<pre>';
-var_dump(array(
-	
-	date('Y-m-01', $sUserSelection),
-	$aRouter['date'],
-	isset($aRouter['date']),
-	$sUserSelection,
-	$aRouter['date'],
-	$iSelectYear.$iSelectMonth,
-	$aRouter['date'] == $iSelectYear.$iSelectMonth,
-	isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth
-));	
-echo '</pre>';
-
 	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
 	else $sSelected = '';
 	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
