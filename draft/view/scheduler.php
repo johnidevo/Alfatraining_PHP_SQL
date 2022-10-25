@@ -37,7 +37,7 @@ $aUpdateLink['page'] = 'planer';
 
 $aPage['scheduler_content'] .= '<tbody>';
 $sField = '';
-for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
+for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	$aAppointments = array();
 	foreach($aResults as $aDataDate)

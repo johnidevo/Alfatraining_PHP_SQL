@@ -79,10 +79,20 @@ $aCancel = $aRouter;
 unset($aCancel['id']);
 if (isset($aScheduler['update'])) $sSubmitCancel = '<a href="/?'. http_build_query($aCancel) .'">Abbrechen</a>';
 else $sSubmitCancel = '';
-#<form action="/?'. http_build_query($aRouter) .'" method="post">
+
+$aDelete = $aRouter;
+$aDelete['delete'] = $aRouter['delete'] = $aRouter['id'];
+unset($aRouter['id']);
+unset($aDelete['id']);
+if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query($aDelete) .'">Löschen</a>';
+else $sSubmitDelete = '';
 
 $aPage['planer_content'] .= '</tbody>';
-$aPage['planer_sidebar'] .= '<tfoot><tr><td><input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL. $sSubmitCancel .'</td></tr></tfoot>';
+$aPage['planer_sidebar'] .= '<tfoot><tr><td>';
+$aPage['planer_sidebar'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
+$aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
+$aPage['planer_sidebar'] .= $sSubmitDelete .PHP_EOL;
+$aPage['planer_sidebar'] .= '</td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
 
 

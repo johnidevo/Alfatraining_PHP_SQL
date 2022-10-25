@@ -25,7 +25,6 @@ function scheduler_planer()
 	if (isset($aRouter['id'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (empty($_POST)) return true;
-	var_dump($_POST);
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
 	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
@@ -42,7 +41,7 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	$sQuery = "SELECT * FROM `appointments` where `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) ." ORDER BY date ASC;";
+	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) ." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
@@ -51,7 +50,7 @@ function scheduler_list()
 function scheduler_planer_update()
 {
 	global $aRouter, $sQuery, $aResults, $aScheduler;
-	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
+	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
 	/*  */
@@ -63,7 +62,7 @@ function scheduler_planer_update()
 	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	if (!event_success()) error_throw('event_success()');
 	/*  */
-	$sQuery = "SELECT * FROM `appointments` where `id` = ". $aRouter['id'] .";";
+	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
 	unset($aRouter['id']);
@@ -72,8 +71,13 @@ function scheduler_planer_update()
 
 function scheduler_planer_delete()
 {
-	global $aRouter, $sQuery, $aResults, $aEvent;
-
+	global $aRouter, $sQuery, $aResults;
+	/*  */
+	if (!isset($aRouter['delete'])) return event_error();
+	$sQuery = "DELETE FROM `appointments` WHERE `id` = ". $aRouter['delete'] .";";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	unset($aRouter['delete']);
+	if (!event_success()) error_throw('event_success()');
 	return true;
 }
 
