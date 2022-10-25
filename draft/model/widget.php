@@ -137,7 +137,7 @@ function widget_event()
 	global $aRouter, $aEvent, $aWidget;
 	$aWidget['events'] = '';
 	if (empty($aEvent)) return true;
-	$aWidget['events'] = '<div class="'. $aEvent['type'] .'" id="event"><h3>'. $aEvent['message'] .'</h3></div>';
+	$aWidget['events'] = '<div class="'. $aEvent['type'] .'" id="event"><b>'. $aEvent['message'] .'</b></div>';
 	if (!event_clear()) error_throw('event_clear()');
 	return true;
 }

@@ -4,6 +4,7 @@
 #call dispatch
 #-router // get uri parameter for request
 #-setup frontend // update database
+#-model init // setup models
 #-call view // setup html document
 #-call widget.php function to form the content // refere data
 #end dispatcher // build

@@ -41,7 +41,9 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= ". strtotime(date('Ym01', strtotime(time() .'-1 week') )) ." ORDER BY date ASC;";
+	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
+		. strtotime(date('Ym01', strtotime(time() .'-1 week') )) 
+		." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
