@@ -78,11 +78,11 @@ $aPage['calendar_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr><
 $aPage['calendar_content'] .= '<tbody>';
 
 $sField = $sChecked = '';
-for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
+for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
-	if (date('Ym', time()) == date('Ym', $i)) 
+	if (date('Ym', $sUserSelection) == date('Ym', $i)) 
 		$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
 	else 
 		$sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
@@ -116,7 +116,7 @@ $aPage['content'] .= '
 	</div>
 ';
 
-#var_dump($aResults);
+var_dump($aResults);
 
 function html_planer_radio_day($sName, $iValue, $sChecked = ''){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';
