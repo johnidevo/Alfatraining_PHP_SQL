@@ -6,25 +6,41 @@
 
 global $aPage, $aRouter, $aResults;
 $aPage = array();
-$aPage['content'] = $aPage['script'] = '';
+$aPage['content'] = $aPage['script'] = $aPage['calendar_content'] = '';
 $aPage['title'] = 'Suche';
 
-if (isset($aRouter['date'])) $iDateCurrentMonth = date('n', $aRouter['date'] .'01 12:00:00');
-else $iDateCurrentMonth = date('n', time());
+if (isset($aRouter['date'])) $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
+$sUserSelection = time();
+
+$iDateMonth = date('n', $sUserSelection);
 $aSelectOptions = array();
-for ($i = $iDateCurrentMonth, $j = 0; $j <= 12; $i++, $j++)
+for ($i = $iDateMonth, $j = 0; $j <= 12; $i++, $j++)
 {
 	if ($j == 0) $iSelectYear = (int) date('Y', time());
 	$iSelectMonth = str_pad($i, 2, 0, STR_PAD_LEFT);
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-	if ($aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
+
+echo '<pre>';
+var_dump(array(
+	
+	date('Y-m-01', $sUserSelection),
+	$aRouter['date'],
+	isset($aRouter['date']),
+	$sUserSelection,
+	$aRouter['date'],
+	$iSelectYear.$iSelectMonth,
+	$aRouter['date'] == $iSelectYear.$iSelectMonth,
+	isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth
+));	
+echo '</pre>';
+
+	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
 	else $sSelected = '';
 	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
 	array_push($aSelectOptions, $sOption);
 }
-
 
 /* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
@@ -32,11 +48,11 @@ $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
-$iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
+$iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
+$iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
 
-$iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
-$iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
+$iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
+$iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
 
 $aPage['calendar_content'] .= '<table>';
 $aPage['calendar_content'] .= '<thead>';
@@ -45,10 +61,10 @@ $aPage['calendar_content'] .= '<label for="suche_date">Wählen einen Monat aus:<
 $aPage['calendar_content'] .= '<select name="date">'. implode('', $aSelectOptions) .'</select>';
 $aPage['calendar_content'] .= '</th>';
 $aPage['calendar_content'] .= '<th colspan="4">';
-$aPage['calendar_content'] .= '<br/>';
+$aPage['calendar_content'] .= '<label for=""><br/></label>';
 $aPage['calendar_content'] .= '<input type="submit" value="Vorlegen" />';
 $aPage['calendar_content'] .= '</th></tr>';
-$aPage['calendar_content'] .= '<tr><th colspan="7">'. date('F', time()) .'</th></tr>';
+$aPage['calendar_content'] .= '<tr><th colspan="7">'. date('F', $sUserSelection) .'</th></tr>';
 $aPage['calendar_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['calendar_content'] .= '<tbody>';
 
