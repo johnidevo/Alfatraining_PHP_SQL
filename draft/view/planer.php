@@ -81,9 +81,12 @@ if (isset($aScheduler['update'])) $sSubmitCancel = '<a href="/?'. http_build_que
 else $sSubmitCancel = '';
 
 $aDelete = $aRouter;
-$aDelete['delete'] = $aRouter['delete'] = $aRouter['id'];
-unset($aRouter['id']);
-unset($aDelete['id']);
+if (isset($aRouter['delete']))
+{
+	$aDelete['delete'] = $aRouter['delete'] = $aRouter['id'];
+	if(isset($aRouter['id'])) unset($aRouter['id']);
+	if(isset($aDelete['id'])) unset($aDelete['id']);
+}
 if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query($aDelete) .'">Löschen</a>';
 else $sSubmitDelete = '';
 
