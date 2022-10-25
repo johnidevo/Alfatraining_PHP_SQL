@@ -18,23 +18,6 @@ $aColors = array(
 
 if (!isset($aRouter['date'])) $sUserSelection = time();
 else $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
-
-/*
-echo '<pre>';
-var_dump(array(
-	date('Ymd', strtotime($aRouter['date'] .'01 12:00:00')),
-	$aRouter['date'] .'01 12:00:00',
-	$aRouter['date'],
-	$sUserSelection,
-	date('Ymd', $sUserSelection),
-	date('Y-m-01', $sUserSelection),
-	$aRouter['date'],
-	isset($aRouter['date']),
-	$sUserSelection
-));	
-echo '</pre>';
-*/
-
 $iDateMonth = date('n', time());
 $aSelectOptions = array();
 for ($i = $iDateMonth, $j = 0; $j <= 11; $i++, $j++)
@@ -76,32 +59,12 @@ $aPage['calendar_content'] .= '<tr><th colspan="7">'. date('F', $sUserSelection)
 $aPage['calendar_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['calendar_content'] .= '<tbody>';
 
-/*
-	$aAppointments = array();
-	foreach($aResults as $aDataDate)
-	{
-		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
-		{
-			$aUpdateLink['id'] = (int)$aDataDate['id'];
-			$iKeyColor = array_rand($aColors);
-			$sLinkStyle = 'background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] .';';
-			$sAppointment = '<a style="'. $sLinkStyle .'" href="/?'. http_build_query($aUpdateLink) .'">'. date('H:i', $aDataDate['date']) .'</a>';
-			array_push($aAppointments, $sAppointment);
-		}
-	}
-	
-	$sField .= '<td>';
-	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
-	$sField .= implode(PHP_EOL, $aAppointments);
-	$sField .= '</td>';
-*/
 $sField = $sChecked = '';
 $iEndMonth = 0;
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
-	
 	$aAppointments = array();
 	foreach($aResults as $aDataDate)
 	{
@@ -114,7 +77,6 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 			array_push($aAppointments, $sAppointment);
 		}
 	}
-	
 	if (date('Ym', $sUserSelection) == date('Ym', $i)) 
 		$sField .= '<td><b>'. html_planer_label_day(date('d', $i), $i, $sChecked) 
 			.'<br/>'. implode(PHP_EOL, $aAppointments) .'</b></td>';

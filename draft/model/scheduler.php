@@ -41,6 +41,7 @@ function scheduler_planer()
 10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
 		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.	
 */
+/*
 function scheduler_list()
 {
 	global $sQuery, $aResults;
@@ -50,6 +51,7 @@ function scheduler_list()
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }
+*/
 
 
 function scheduler_planer_update()
@@ -86,7 +88,7 @@ function scheduler_planer_delete()
 	return true;
 }
 
-function calendar_list()
+function scheduler_list()
 {
 	global $aRouter, $sQuery, $aResults;
 	if (empty($_POST['date'])) return true;
