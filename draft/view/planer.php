@@ -22,7 +22,7 @@ $iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); 
 $iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
 # table header
 $aPage['planer_content'] .= '<table>';
-$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
+$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', time()) .'</th></tr>';
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 
@@ -44,10 +44,25 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 }
 
 # table footer
+if (!isset($aRouter['date'])) $sLinkFootDate = time();
+else $sLinkFootDate = strtotime($aRouter['date'] .'01 12:00:00');
+$aRouteMonths = $aRouter;
+
+#$aRouteMonths['']
+# + -
+$aLinkFootDate array(date('Y', $aLinkFootDate) => date('n', $aLinkFootDate));
+var_dump(date('Y-m', $aLinkFootDate));
+
 $aPage['planer_content'] .= '<tfoot><tr><td colspan="1">';
-$aPage['planer_content'] .= '' .PHP_EOL;
+$aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
+$aPage['planer_content'] .= '<input type="button" value="'. date('F', $sLinkFootDate) .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="hidden" value="'. $sLinkFootDate .'">' .PHP_EOL;
+$aPage['planer_content'] .= '</form>';
 $aPage['planer_content'] .= '</td><td colspan="5"></td><td colspan="1">';
-$aPage['planer_content'] .= '' .PHP_EOL;
+$aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
+$aPage['planer_content'] .= '<input type="button" value="'. date('F', $sLinkFootDate) .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="hidden" value="'. $sLinkFootDate .'">' .PHP_EOL;
+$aPage['planer_content'] .= '</form>';
 $aPage['planer_content'] .= '</td></tr></tfoot>';
 
 $aPage['planer_content'] .= '</tbody>';

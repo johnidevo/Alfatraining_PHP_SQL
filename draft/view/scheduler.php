@@ -22,7 +22,7 @@ $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $aPage['scheduler_content'] .= '<table>';
-$aPage['scheduler_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
+$aPage['scheduler_content'] .= '<thead><tr><th colspan="7">'. date('F Y', time()) .'</th></tr>';
 $aPage['scheduler_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
