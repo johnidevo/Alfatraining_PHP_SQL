@@ -27,13 +27,8 @@ function scheduler_planer()
 	global $aRouter, $sQuery, $aResults, $aEvent;
 	if (isset($aRouter['id'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
-	if (empty($_POST)) return true;
-	if (!isset($_POST['date_planer'])) return event_error();
-	if (!isset($_POST['hour_planer'])) return event_error();
-	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
-	$sQuery = "INSERT INTO `appointments` (`id`, `date`) VALUES (NULL, '". $iDate ."');";
-	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
-	if (!event_success()) error_throw('event_success()');
+	if (isset($aRouter['month'])) return scheduler_planer_month();
+	if (!empty($_POST)) return scheduler_planer_new();
 	return true;
 }
 
@@ -44,13 +39,15 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
+	if (!isset($_POST['date_planer'])) return event_error();
+	if (!isset($_POST['hour_planer'])) return event_error();
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
 		. strtotime(date('Ym01', strtotime(time() .'-1 week') )) 
 		." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
+	if (!event_success()) error_throw('event_success()');
 	return true;
 }
-
 
 function scheduler_planer_update()
 {
@@ -82,6 +79,31 @@ function scheduler_planer_delete()
 	$sQuery = "DELETE FROM `appointments` WHERE `id` = ". $aRouter['delete'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	unset($aRouter['delete']);
+	if (!event_success()) error_throw('event_success()');
+	return true;
+}
+
+function scheduler_planer_month()
+{
+	global $aRouter, $sQuery, $aResults;
+	/*  */
+	var_dump($aRouter);
+	if (!isset($aRouter['month'])) return event_error();
+	$sQuery = "SELECT * FROM `appointments` WHERE `date` = "
+		. strtotime(date('Ym01', strtotime( $aRouter['month'] .'01 12:00:00' ))) 
+		." ORDER BY date ASC;";
+	var_dump($sQuery);
+	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
+	return true;
+}
+
+function scheduler_planer_new()
+{
+	global $aRouter, $sQuery, $aResults, $aEvent;
+	if (empty($_POST)) return true;
+	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
+	$sQuery = "INSERT INTO `appointments` (`id`, `date`) VALUES (NULL, '". $iDate ."');";
+	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	if (!event_success()) error_throw('event_success()');
 	return true;
 }

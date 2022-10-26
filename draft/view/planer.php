@@ -46,22 +46,31 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 # table footer
 if (!isset($aRouter['date'])) $sLinkFootDate = time();
 else $sLinkFootDate = strtotime($aRouter['date'] .'01 12:00:00');
-$aRouteMonths = $aRouter;
-
+# 
 $sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
 $sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
+$aMonthPrev = $aRouter;
+$aMonthPrev['month'] = date('Ym', $sMonthPrev);
+$aMonthNext = $aRouter;
+$aMonthNext['month'] = date('Ym', $sMonthNext);
 
-$aPage['planer_content'] .= '<tfoot><tr><td colspan="2">';
-$aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
-$aPage['planer_content'] .= '<input type="submit" value="'. date('F', $sMonthPrev) .'">' .PHP_EOL;
-$aPage['planer_content'] .= '<input type="hidden" value="'. $sMonthPrev .'">' .PHP_EOL;
-$aPage['planer_content'] .= '</form>';
-$aPage['planer_content'] .= '</td><td colspan="3"></td><td colspan="2">';
-$aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
-$aPage['planer_content'] .= '<input type="submit" value="'. date('F', $sMonthNext) .'">' .PHP_EOL;
-$aPage['planer_content'] .= '<input type="hidden" value="'. $sMonthNext .'">' .PHP_EOL;
-$aPage['planer_content'] .= '</form>';
-$aPage['planer_content'] .= '</td></tr></tfoot>';
+#echo '<pre>';
+#var_dump(array($aMonthPrev, $aMonthNext));
+#echo '</pre>';
+
+$aPage['planer_content'] .= '<tfoot><tr>';
+
+$aPage['planer_content'] .= '<td colspan="2">';
+$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthPrev) .'">'. $sMonthPrev .'</a>';
+$aPage['planer_content'] .= '</td>';
+
+$aPage['planer_content'] .= '<td colspan="3"></td>';
+
+$aPage['planer_content'] .= '<td colspan="2">';
+$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthNext) .'">'. $sMonthNext .'</a>';
+$aPage['planer_content'] .= '</td>';
+
+$aPage['planer_content'] .= '</tr></tfoot>';
 
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
