@@ -29,6 +29,7 @@ function scheduler_planer()
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (isset($aRouter['month'])) return scheduler_planer_month();
 	if (!empty($_POST)) return scheduler_planer_new();
+	else if (!event_error()) error_throw('event_success()');
 	return true;
 }
 
@@ -39,13 +40,10 @@ function scheduler_planer()
 function scheduler_list()
 {
 	global $sQuery, $aResults;
-	if (!isset($_POST['date_planer'])) return event_error();
-	if (!isset($_POST['hour_planer'])) return event_error();
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
 		. strtotime(date('Ym01', strtotime(time() .'-1 week') )) 
 		." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
-	if (!event_success()) error_throw('event_success()');
 	return true;
 }
 
