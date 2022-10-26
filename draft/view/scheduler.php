@@ -83,21 +83,15 @@ $aMonthPrev = $aRouter;
 $aMonthPrev['month'] = date('Ym', $sMonthPrev);
 $aMonthNext = $aRouter;
 $aMonthNext['month'] = date('Ym', $sMonthNext);
-
 $aPage['planer_content'] .= '<tfoot><tr>';
-
-$aPage['planer_content'] .= '<td colspan="2">';
-$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthPrev) .'">'. $sMonthPrev .'</a>';
+$aPage['planer_content'] .= '<td colspan="1">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
 $aPage['planer_content'] .= '</td>';
-
-$aPage['planer_content'] .= '<td colspan="3"></td>';
-
-$aPage['planer_content'] .= '<td colspan="2">';
-$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthNext) .'">'. $sMonthNext .'</a>';
+$aPage['planer_content'] .= '<td colspan="4"></td>';
+$aPage['planer_content'] .= '<td colspan="1">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthNext) .'">'. date('F', $sMonthNext) .'</a></button>';
 $aPage['planer_content'] .= '</td>';
-
 $aPage['planer_content'] .= '</tr></tfoot>';
-
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 

@@ -17,11 +17,9 @@ else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
-
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
 $iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
-
 $iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
 
@@ -51,31 +49,23 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 # table footer
 if (!isset($aRouter['month'])) $sLinkFootDate = time();
 else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
-# 
 $sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
 $sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
 $aMonthPrev = $aRouter;
 $aMonthPrev['month'] = date('Ym', $sMonthPrev);
 $aMonthNext = $aRouter;
 $aMonthNext['month'] = date('Ym', $sMonthNext);
-
 $aPage['planer_content'] .= '<tfoot><tr>';
-
 $aPage['planer_content'] .= '<td colspan="2">';
-$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthPrev) .'">'. $sMonthPrev .'</a>';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
 $aPage['planer_content'] .= '</td>';
-
 $aPage['planer_content'] .= '<td colspan="3"></td>';
-
 $aPage['planer_content'] .= '<td colspan="2">';
-$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthNext) .'">'. $sMonthNext .'</a>';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthNext) .'">'. date('F', $sMonthNext) .'</a></button>';
 $aPage['planer_content'] .= '</td>';
-
 $aPage['planer_content'] .= '</tr></tfoot>';
-
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
-
 
 # sidebar
 $aPage['planer_sidebar'] .= '<table><thead><tr><td>Besprechungsstunde</td></tr></thead>';
@@ -89,21 +79,17 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = $sChecked = '';
 }
-
 if (isset($aScheduler['update'])) $sSubmitValue = 'Aktualisieren';
 else $sSubmitValue = 'Einreichen';
-
 $aCancel = $aRouter;
 if (isset($aCancel['id'])) unset($aCancel['id']);
 if (isset($aScheduler['update'])) $sSubmitCancel = '<a href="/?'. http_build_query($aCancel) .'">Abbrechen</a>';
 else $sSubmitCancel = '';
-
 $aDelete = $aRouter;
 if (isset($aDelete['id'])) unset($aDelete['id']);
 if (isset($aRouter['id'])) $aDelete['delete'] = $aRouter['id'];
 if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query($aDelete) .'">Löschen</a>';
 else $sSubmitDelete = '';
-
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td>';
 $aPage['planer_sidebar'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
@@ -111,7 +97,6 @@ $aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitDelete .PHP_EOL;
 $aPage['planer_sidebar'] .= '</td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
-
 
 /*
 10 P	3. Daten anzeigen: Erstellen Sie einen รถffentlichen Bereich 
