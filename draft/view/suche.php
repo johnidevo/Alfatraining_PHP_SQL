@@ -81,7 +81,7 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	}
 	if (date('Ym', $sUserSelection) == date('Ym', $i)) 
 		$sField .= '<td><b>'. html_planer_label_day(date('d', $i), $i, $sChecked) 
-			.'<br/>'. implode(PHP_EOL, $aAppointments) .'</b></td>';
+			.'</b><br/>'. implode(PHP_EOL, $aAppointments) .'</td>';
 	else 
 		$sField .= '<td>'. html_planer_label_day(date('d', $i), $i, $sChecked) .'</td>';
 	$sChecked = '';

@@ -39,6 +39,7 @@ $aPage['scheduler_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
+	# appointments
 	$aAppointments = array();
 	foreach($aResults as $aDataDate)
 	{
@@ -52,10 +53,21 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 		}
 	}
 	
-	$sField .= '<td>';
-	$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
-	$sField .= implode(PHP_EOL, $aAppointments);
-	$sField .= '</td>';
+	# calendar
+	if (date('Ym', time()) == date('Ym', $i))
+	{
+		$sField .= '<td><b>';
+		$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
+		$sField .= implode(PHP_EOL, $aAppointments);
+		$sField .= '</b></td>';
+	}
+	else
+	{
+		$sField .= '<td>';
+		$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
+		$sField .= implode(PHP_EOL, $aAppointments);
+		$sField .= '</b>';
+	}
 	
 	if ($k == 6){
 		$k = -1;
