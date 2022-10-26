@@ -87,12 +87,10 @@ function scheduler_planer_month()
 {
 	global $aRouter, $sQuery, $aResults;
 	/*  */
-	var_dump($aRouter);
 	if (!isset($aRouter['month'])) return event_error();
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` = "
 		. strtotime(date('Ym01', strtotime( $aRouter['month'] .'01 12:00:00' ))) 
 		." ORDER BY date ASC;";
-	var_dump($sQuery);
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
 }

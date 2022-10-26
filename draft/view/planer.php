@@ -9,7 +9,6 @@ $aPage = array();
 $aPage['content'] = $aPage['planer_content'] = $aPage['planer_sidebar'] = '';
 $aPage['title'] = 'Terminplaner';
 
-
 # uri
 if (!isset($aRouter['month'])) $sUserSelection = time();
 else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
@@ -59,10 +58,6 @@ $aMonthPrev = $aRouter;
 $aMonthPrev['month'] = date('Ym', $sMonthPrev);
 $aMonthNext = $aRouter;
 $aMonthNext['month'] = date('Ym', $sMonthNext);
-
-#echo '<pre>';
-#var_dump(array($aMonthPrev, $aMonthNext));
-#echo '</pre>';
 
 $aPage['planer_content'] .= '<tfoot><tr>';
 
