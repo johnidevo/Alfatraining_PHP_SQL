@@ -6,7 +6,7 @@
 
 global $aRouter, $aPage, $aResults, $aScheduler;
 $aPage = array();
-$aPage['content'] = $aPage['scheduler_content'] = $aPage['scheduler_sidebar'] = '';
+$aPage['content'] = $aPage['planer_content'] = $aPage['scheduler_sidebar'] = '';
 $aPage['title'] = 'Scheduler liste';
 $aColors = array(
 	array('#000', '#febc56'), 
@@ -16,26 +16,30 @@ $aColors = array(
 	array('#fff', '#662d91')
 );
 
+# uri
+if (!isset($aRouter['month'])) $sUserSelection = time();
+else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
+
 /* Content */
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
-$aPage['scheduler_content'] .= '<table>';
-$aPage['scheduler_content'] .= '<thead><tr><th colspan="7">'. date('F Y', time()) .'</th></tr>';
-$aPage['scheduler_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
+$aPage['planer_content'] .= '<table>';
+$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
+$aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 
 $iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
-$iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
+$iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
+$iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
 
-$iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
-$iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
+$iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
+$iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
 
 $aUpdateLink = $aRouter;
 $aUpdateLink['page'] = 'planer';
 
-$aPage['scheduler_content'] .= '<tbody>';
+$aPage['planer_content'] .= '<tbody>';
 $sField = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
@@ -64,12 +68,38 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	
 	if ($k == 6){
 		$k = -1;
-		$aPage['scheduler_content'] .= '<tr>'. $sField .'</tr>';
+		$aPage['planer_content'] .= '<tr>'. $sField .'</tr>';
 		$sField = '';
 	}
 }
-$aPage['scheduler_content'] .= '</tbody>';
-$aPage['scheduler_content'] .= '</table>';
+
+# table footer
+if (!isset($aRouter['month'])) $sLinkFootDate = time();
+else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
+# 
+$sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
+$sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
+$aMonthPrev = $aRouter;
+$aMonthPrev['month'] = date('Ym', $sMonthPrev);
+$aMonthNext = $aRouter;
+$aMonthNext['month'] = date('Ym', $sMonthNext);
+
+$aPage['planer_content'] .= '<tfoot><tr>';
+
+$aPage['planer_content'] .= '<td colspan="2">';
+$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthPrev) .'">'. $sMonthPrev .'</a>';
+$aPage['planer_content'] .= '</td>';
+
+$aPage['planer_content'] .= '<td colspan="3"></td>';
+
+$aPage['planer_content'] .= '<td colspan="2">';
+$aPage['planer_content'] .= '<a href="/?'. http_build_query($aMonthNext) .'">'. $sMonthNext .'</a>';
+$aPage['planer_content'] .= '</td>';
+
+$aPage['planer_content'] .= '</tr></tfoot>';
+
+$aPage['planer_content'] .= '</tbody>';
+$aPage['planer_content'] .= '</table>';
 
 /*
 10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
@@ -80,7 +110,7 @@ $aPage['content'] .= '
 		<div id="content">
 			<h3>Scheduler liste</h3>
 			<hr></br>
-			'. $aPage['scheduler_content'] .'
+			'. $aPage['planer_content'] .'
 		</div>
 	</form>
 ';
