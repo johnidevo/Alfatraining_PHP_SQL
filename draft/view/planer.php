@@ -9,20 +9,26 @@ $aPage = array();
 $aPage['content'] = $aPage['planer_content'] = $aPage['planer_sidebar'] = '';
 $aPage['title'] = 'Terminplaner';
 
-/* Content */
+
+# uri
+if (!isset($aRouter['month'])) $sUserSelection = time();
+else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
+
+# content
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
 
 $iDateNow = date('w');
-$iDatePrev = date('w', strtotime(date('Y-m-1', time()))) - 1;
-$iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
+$iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
+$iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
 
-$iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
-$iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
+$iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
+$iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
+
 # table header
 $aPage['planer_content'] .= '<table>';
-$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', time()) .'</th></tr>';
+$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 
@@ -44,8 +50,8 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 }
 
 # table footer
-if (!isset($aRouter['date'])) $sLinkFootDate = time();
-else $sLinkFootDate = strtotime($aRouter['date'] .'01 12:00:00');
+if (!isset($aRouter['month'])) $sLinkFootDate = time();
+else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
 # 
 $sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
 $sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
@@ -76,7 +82,7 @@ $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 
 
-/* Sidebar */
+# sidebar
 $aPage['planer_sidebar'] .= '<table><thead><tr><td>Besprechungsstunde</td></tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 $sChecked = '';
