@@ -20,13 +20,12 @@ $iDateNext = 7 - date('w', strtotime(date('Y-m-t', time())));
 
 $iDatePrevTable = strtotime(date('Y-m-1', time()) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', time()) .' + '. $iDateNext .' days'); //<<
-
+# table header
 $aPage['planer_content'] .= '<table>';
 $aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F', time()) .'</th></tr>';
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 
-#echo '<pre>';
 $sField = $sChecked = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 {
@@ -35,7 +34,7 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 	if (date('Ym', time()) == date('Ym', $i)) 
 		$sField .= '<td><b>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
 	else 
-		$sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</b></td>';
+		$sField .= '<td>'. html_planer_radio_day(date('d', $i), $i, $sChecked) .'</td>';
 	$sChecked = '';
 	if ($k == 6){
 		$k = -1;
@@ -44,6 +43,7 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
 	}
 }
 
+# table footer
 $aPage['planer_content'] .= '<tfoot><tr><td colspan="1">';
 $aPage['planer_content'] .= '' .PHP_EOL;
 $aPage['planer_content'] .= '</td><td colspan="5"></td><td colspan="1">';

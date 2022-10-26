@@ -54,20 +54,13 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	}
 	
 	# calendar
-	if (date('Ym', time()) == date('Ym', $i))
-	{
-		$sField .= '<td><b>';
+	$sField .= '<td>';
+	if (date('Ym', time()) == date('Ym', $i)) 
+		$sField .= '<b>'. html_scheduler_label_day(date('d', $i), $i) .'</b><br/>';
+	else 
 		$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
-		$sField .= implode(PHP_EOL, $aAppointments);
-		$sField .= '</b></td>';
-	}
-	else
-	{
-		$sField .= '<td>';
-		$sField .= html_scheduler_label_day(date('d', $i), $i) .'<br/>';
-		$sField .= implode(PHP_EOL, $aAppointments);
-		$sField .= '</b>';
-	}
+	$sField .= implode(PHP_EOL, $aAppointments);
+	$sField .= '</td>';
 	
 	if ($k == 6){
 		$k = -1;

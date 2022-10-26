@@ -4,7 +4,7 @@
 #set data variable for javascript if needed
 #
 
-global $aPage;
+global $aPage, $aRounter;
 $aPage = array();
 $aPage['content'] = $aPage['script'] = '';
 
@@ -19,8 +19,10 @@ $aPage['content'] .= '
 	</div>
 ';
 
+#$sRedirect = '/?'. http_build_query($aRounter);
+#$aPage['script'] = 'window.location.href = "'. $sRedirect .'";';
 $aPage['script'] = 'window.location.href = "?page=dashboard";';
-	
+
 function redirect_init()
 {
 	global $aRouter;

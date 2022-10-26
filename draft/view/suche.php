@@ -93,15 +93,10 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	$iEndMonth = $iEndMonth + 1;
 }
 
-$aPage['suche_content'] .= '<tfoot><tr><td colspan="1">';
-$aPage['suche_content'] .= '' .PHP_EOL;
-$aPage['suche_content'] .= '</td><td colspan="5"></td><td colspan="1">';
-$aPage['suche_content'] .= '' .PHP_EOL;
-$aPage['suche_content'] .= '</td></tr></tfoot>';
 $aPage['suche_content'] .= '</tbody>';
 $aPage['suche_content'] .= '</table>';
 
-#
+# content
 $aPage['content'] .= '
 	<div id="sidebar">
 	</div>
@@ -114,8 +109,6 @@ $aPage['content'] .= '
 	</div>
 ';
 
-#var_dump($aResults);
-
 function html_planer_label_day($sName, $iValue, $sChecked = ''){
 	return '<label for="date_'. $sName .'">'. $sName .'</label>';
 }
@@ -125,6 +118,5 @@ function suche_init()
 	global $aRouter;
 	return true;
 }
-
 
 ?>
