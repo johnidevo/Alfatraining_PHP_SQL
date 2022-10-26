@@ -27,7 +27,7 @@ $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></t
 $aPage['planer_content'] .= '<tbody>';
 
 $sField = $sChecked = '';
-for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + 86400, $k++)
+for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
 	if (isset($aScheduler['update']))
 	if (date('Y-m-d', $aScheduler['update']['date']) == date('Y-m-d', $i)) $sChecked = 'checked';
@@ -48,20 +48,18 @@ if (!isset($aRouter['date'])) $sLinkFootDate = time();
 else $sLinkFootDate = strtotime($aRouter['date'] .'01 12:00:00');
 $aRouteMonths = $aRouter;
 
-#$aRouteMonths['']
-# + -
-$aLinkFootDate array(date('Y', $aLinkFootDate) => date('n', $aLinkFootDate));
-var_dump(date('Y-m', $aLinkFootDate));
+$sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
+$sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
 
-$aPage['planer_content'] .= '<tfoot><tr><td colspan="1">';
+$aPage['planer_content'] .= '<tfoot><tr><td colspan="2">';
 $aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
-$aPage['planer_content'] .= '<input type="button" value="'. date('F', $sLinkFootDate) .'">' .PHP_EOL;
-$aPage['planer_content'] .= '<input type="hidden" value="'. $sLinkFootDate .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="submit" value="'. date('F', $sMonthPrev) .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="hidden" value="'. $sMonthPrev .'">' .PHP_EOL;
 $aPage['planer_content'] .= '</form>';
-$aPage['planer_content'] .= '</td><td colspan="5"></td><td colspan="1">';
+$aPage['planer_content'] .= '</td><td colspan="3"></td><td colspan="2">';
 $aPage['planer_content'] .= '<form action="/?'. http_build_query($aRouter) .'" method="get">';
-$aPage['planer_content'] .= '<input type="button" value="'. date('F', $sLinkFootDate) .'">' .PHP_EOL;
-$aPage['planer_content'] .= '<input type="hidden" value="'. $sLinkFootDate .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="submit" value="'. date('F', $sMonthNext) .'">' .PHP_EOL;
+$aPage['planer_content'] .= '<input type="hidden" value="'. $sMonthNext .'">' .PHP_EOL;
 $aPage['planer_content'] .= '</form>';
 $aPage['planer_content'] .= '</td></tr></tfoot>';
 
@@ -81,7 +79,7 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = $sChecked = '';
 }
-	
+
 if (isset($aScheduler['update'])) $sSubmitValue = 'Aktualisieren';
 else $sSubmitValue = 'Einreichen';
 
