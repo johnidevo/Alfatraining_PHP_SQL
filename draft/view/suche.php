@@ -59,6 +59,8 @@ $aPage['suche_content'] .= '<tr><th colspan="7">'. date('F', $sUserSelection) .'
 $aPage['suche_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['suche_content'] .= '<tbody>';
 
+$aUpdateLink = $aRouter;
+$aUpdateLink['page'] = 'planer';
 $sField = $sChecked = '';
 $iEndMonth = 0;
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
