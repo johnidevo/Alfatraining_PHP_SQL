@@ -117,6 +117,7 @@ function widget_nav_menu()
 		#if (isset($_SESSION['user']) && $sLink == 'planer') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'calendar') continue;
 		if (!isset($_SESSION['user']) && $sLink == 'scheduler') continue;
+		if (!isset($_SESSION['user']) && $sLink == 'suche') continue;
 		$aLinks = $aRouter;
 		$aLinks['page'] = $sLink;
 		$sLink = '<li><a class="'. $sSelected .'" href="?'. http_build_query($aLinks) .'">'. $sName .'</a></li>';

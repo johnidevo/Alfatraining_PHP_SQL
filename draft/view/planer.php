@@ -77,7 +77,7 @@ else $sSubmitCancel = '';
 
 $aDelete = $aRouter;
 if (isset($aDelete['id'])) unset($aDelete['id']);
-$aDelete['delete'] = $aRouter['id'];
+if (isset($aRouter['id'])) $aDelete['delete'] = $aRouter['id'];
 if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query($aDelete) .'">Löschen</a>';
 else $sSubmitDelete = '';
 
