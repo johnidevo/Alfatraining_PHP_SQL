@@ -25,11 +25,10 @@ function scheduler_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults, $aEvent;
+	if (!empty($_POST)) return scheduler_planer_new();
 	if (isset($aRouter['id'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (isset($aRouter['month'])) return scheduler_planer_month();
-	if (!empty($_POST)) return scheduler_planer_new();
-	else if (!event_error()) error_throw('event_success()');
 	return true;
 }
 

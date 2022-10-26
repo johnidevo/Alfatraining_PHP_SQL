@@ -28,7 +28,6 @@ $aPage['planer_content'] .= '<table>';
 $aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
-
 $sField = $sChecked = '';
 for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k++)
 {
@@ -134,7 +133,5 @@ function planer_init()
 	global $sPage;
 	return true;
 }
-
-
 
 ?>
