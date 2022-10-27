@@ -25,8 +25,11 @@ function scheduler_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults, $aEvent;
-	var_dump($aRouter);
-	if (isset($aRouter['id'])) return scheduler_planer_update();
+	
+	echo '<pre>';
+	var_dump( ['scheduler_planer', $_POST, $aRouter] );
+	echo '</pre>';
+	if (isset($aRouter['update'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (isset($aRouter['month'])) return scheduler_planer_month();
 	if (!empty($_POST)) return scheduler_planer_new();
@@ -51,15 +54,22 @@ function scheduler_list()
 function scheduler_planer_update()
 {
 	global $aRouter, $sQuery, $aResults, $aScheduler;
-	if (!isset($aRouter['id'])) return event_error();
+	if (!isset($aRouter['update'])) return event_error();
 	/* */
-	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
+	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['update'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
 	/* */
 	if (empty($_POST)) return true;
+	
+	echo '<pre>';
+	var_dump( ['scheduler_planer_update', $_POST, $aRouter] );
+	echo '</pre>';
+	
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
+	if (!isset($_POST['planer_update'])) return event_error();
+	
 	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
 	$sQuery = "UPDATE `appointments` SET `date` = '". $iDate ."' WHERE `appointments`.`id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
@@ -98,9 +108,16 @@ function scheduler_planer_month()
 
 function scheduler_planer_new()
 {
+	
 	global $aRouter, $sQuery, $aResults, $aEvent;
 	if (empty($_POST)) return true;
-	if (isset($aRouter['id'])) return event_error();
+	
+	echo '<pre>';
+	var_dump( ['scheduler_planer_new', $_POST, $aRouter] );
+	echo '</pre>';
+	
+	#if (isset($aRouter['id'])) return event_error();
+	if (isset($_POST['planer_update'])) return event_error();
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
 	/* */

@@ -82,7 +82,7 @@ for ($i = 9; $i <= 15; $i++)
 if (isset($aScheduler['update']))
 {
 	$sSubmitValue = 'Aktualisieren';
-	$sSubmitValue =  '<input type="hidden" value="'. $aRouter['id'] .'"><input type="submit" value="'. $sSubmitValue .'">';
+	$sSubmitValue =  '<input type="hidden" value="'. $aRouter['update'] .'" name="planer_update"><input type="submit" value="'. $sSubmitValue .'">';
 }
 else 
 {
@@ -97,14 +97,14 @@ else $sSubmitCancel = '';
 
 $aDelete = $aRouter;
 if (isset($aDelete['id'])) unset($aDelete['id']);
-if (isset($aRouter['id'])) $aDelete['delete'] = $aRouter['id'];
+if (isset($aRouter['update'])) $aDelete['delete'] = $aRouter['update'];
+if (isset($aDelete['update'])) unset($aDelete['update']);
 if (isset($aDelete['delete'])) $sSubmitDelete = '<button><a href="/?'. http_build_query($aDelete) .'">Löschen</a></button>';
 else $sSubmitDelete = '';
 
 $aEdit = $aRouter;
 if (isset($aEdit['id'])) $sSubmitEdit = '<a href="/?'. http_build_query($aEdit) .'">Aktualisieren</a>';
 else $sSubmitEdit = '';
-
 
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td>';
