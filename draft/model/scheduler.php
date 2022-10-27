@@ -31,8 +31,9 @@ function scheduler_planer()
 	#echo '</pre>';
 	if (isset($aRouter['update'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
-	if (isset($aRouter['month'])) return scheduler_planer_month();
 	if (!empty($_POST)) return scheduler_planer_new();
+	
+	if (isset($aRouter['month'])) return scheduler_planer_month();
 	
 	return true;
 }
