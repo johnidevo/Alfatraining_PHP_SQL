@@ -74,7 +74,7 @@ function scheduler_planer_delete()
 	/*  */
 	if (!isset($aRouter['delete'])) return event_error();
 	$sQuery = "DELETE FROM `appointments` WHERE `id` = ". $aRouter['delete'] .";";
-	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	unset($aRouter['delete']);
 	if (!event_success()) error_throw('event_success()');
 	return true;
