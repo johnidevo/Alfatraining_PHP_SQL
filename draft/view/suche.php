@@ -16,8 +16,8 @@ $aColors = array(
 	array('#fff', '#662d91')
 );
 
-if (!isset($aRouter['date'])) $sUserSelection = time();
-else $sUserSelection = strtotime($aRouter['date'] .'01 12:00:00');
+if (!isset($aRouter['month'])) $sUserSelection = time();
+else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
 $iDateMonth = date('n', time());
 $aSelectOptions = array();
 for ($i = $iDateMonth, $j = 0; $j <= 11; $i++, $j++)
@@ -27,7 +27,7 @@ for ($i = $iDateMonth, $j = 0; $j <= 11; $i++, $j++)
 	$sSelectMonth = date('F', strtotime($iSelectYear .'-'. str_pad($i, 2, 0, STR_PAD_LEFT) .'-01') );
 	if ($i == 12) $i = 0; 
 	if ($i == 1) $iSelectYear = $iSelectYear + 1;
-	if (isset($aRouter['date']) && $aRouter['date'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
+	if (isset($aRouter['month']) && $aRouter['month'] == $iSelectYear.$iSelectMonth) $sSelected = 'selected';
 	else $sSelected = '';
 	$sOption = '<option value="'. $iSelectYear.$iSelectMonth .'" '. $sSelected .'>'. $iSelectYear .' - '. $sSelectMonth .'</option>';
 	array_push($aSelectOptions, $sOption);
@@ -49,7 +49,7 @@ $aPage['suche_content'] .= '<table>';
 $aPage['suche_content'] .= '<thead>';
 $aPage['suche_content'] .= '<tr><th colspan="3">';
 $aPage['suche_content'] .= '<label for="suche_date">Wählen einen Monat aus:</label>';
-$aPage['suche_content'] .= '<select name="date">'. implode('', $aSelectOptions) .'</select>';
+$aPage['suche_content'] .= '<select name="month">'. implode('', $aSelectOptions) .'</select>';
 $aPage['suche_content'] .= '</th>';
 $aPage['suche_content'] .= '<th colspan="4">';
 $aPage['suche_content'] .= '<label for=""><br/></label>';

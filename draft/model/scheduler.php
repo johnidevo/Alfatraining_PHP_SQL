@@ -131,8 +131,10 @@ function scheduler_planer_new()
 function suche_list()
 {
 	global $aRouter, $sQuery, $aResults;
-	if (empty($_POST['date'])) return true;
-	$aRouter['date'] = $_POST['date'];
+	if (empty($_POST['month'])) return true;
+	#$aRouter['date'] = $_POST['date'];
+	
+	$aRouter['month'] = $_POST['month'];
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
 		. strtotime( date('Ym01', strtotime($_POST['date'] .'01 12:00:00')) )
 		." ORDER BY date ASC;";
