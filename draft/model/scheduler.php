@@ -26,9 +26,9 @@ function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults, $aEvent;
 	
-	echo '<pre>';
-	var_dump( ['scheduler_planer', $_POST, $aRouter] );
-	echo '</pre>';
+	#echo '<pre>';
+	#var_dump( ['scheduler_planer', $_POST, $aRouter] );
+	#echo '</pre>';
 	if (isset($aRouter['update'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (isset($aRouter['month'])) return scheduler_planer_month();
@@ -62,9 +62,9 @@ function scheduler_planer_update()
 	/* */
 	if (empty($_POST)) return true;
 	
-	echo '<pre>';
-	var_dump( ['scheduler_planer_update', $_POST, $aRouter] );
-	echo '</pre>';
+	#echo '<pre>';
+	#var_dump( ['scheduler_planer_update', $_POST, $aRouter] );
+	#echo '</pre>';
 	
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
@@ -112,10 +112,9 @@ function scheduler_planer_new()
 	global $aRouter, $sQuery, $aResults, $aEvent;
 	if (empty($_POST)) return true;
 	
-	echo '<pre>';
-	var_dump( ['scheduler_planer_new', $_POST, $aRouter] );
-	echo '</pre>';
-	
+	#echo '<pre>';
+	#var_dump( ['scheduler_planer_new', $_POST, $aRouter] );
+	#echo '</pre>';
 	#if (isset($aRouter['id'])) return event_error();
 	if (isset($_POST['planer_update'])) return event_error();
 	if (!isset($_POST['date_planer'])) return event_error();
