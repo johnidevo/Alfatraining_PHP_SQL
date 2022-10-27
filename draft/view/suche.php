@@ -72,7 +72,7 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	{
 		if (date('Ymd', $i) == date('Ymd', (int)$aDataDate['date']))
 		{
-			$aUpdateLink['id'] = (int)$aDataDate['id'];
+			$aUpdateLink['update'] = (int)$aDataDate['id'];
 			$iKeyColor = array_rand($aColors);
 			$sLinkStyle = 'background-color:'. $aColors[$iKeyColor][1] .'; color:'. $aColors[$iKeyColor][0] .';';
 			$sAppointment = '<a style="'. $sLinkStyle .'" href="/?'. http_build_query($aUpdateLink) .'">'. date('H:i', $aDataDate['date']) .'</a>';
