@@ -71,11 +71,11 @@ function scheduler_planer_update()
 	if (!isset($_POST['planer_update'])) return event_error();
 	
 	$iDate = strtotime(date('Y-m-d', $_POST['date_planer']) .' '. $_POST['hour_planer']);
-	$sQuery = "UPDATE `appointments` SET `date` = '". $iDate ."' WHERE `appointments`.`id` = ". $aRouter['id'] .";";
+	$sQuery = "UPDATE `appointments` SET `date` = '". $iDate ."' WHERE `appointments`.`id` = ". $aRouter['update'] .";";
 	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	if (!event_success()) error_throw('event_success()');
 	/* */
-	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
+	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['update'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
 	#unset($aRouter['id']);
