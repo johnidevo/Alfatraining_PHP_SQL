@@ -91,7 +91,7 @@ else
 }
 
 $aCancel = $aRouter;
-if (isset($aCancel['id'])) unset($aCancel['id']);
+if (isset($aCancel['update'])) unset($aCancel['update']);
 if (isset($aScheduler['update'])) $sSubmitCancel = '<button><a href="/?'. http_build_query($aCancel) .'">Abbrechen</a></button>';
 else $sSubmitCancel = '';
 
@@ -108,9 +108,9 @@ else $sSubmitEdit = '';
 
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td>';
-$aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitDelete .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitValue .PHP_EOL;
+$aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
 $aPage['planer_sidebar'] .= '</td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
 
