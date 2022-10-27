@@ -136,7 +136,7 @@ function suche_list()
 	
 	$aRouter['month'] = $_POST['month'];
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` >= "
-		. strtotime( date('Ym01', strtotime($_POST['date'] .'01 12:00:00')) )
+		. strtotime( date('Ym01', strtotime($_POST['month'] .'01 12:00:00')) )
 		." ORDER BY date ASC;";
 	if (!frontend_sql_fetch_assoc()) error_throw('frontend_sql_fetch_assoc()');
 	return true;
