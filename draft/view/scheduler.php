@@ -24,10 +24,33 @@ else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
+# month name and navi
+if (!isset($aRouter['month'])) $sLinkFootDate = time();
+else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
+$sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
+$sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
+$aMonthPrev = $aRouter;
+$aMonthPrev['month'] = date('Ym', $sMonthPrev);
+$aMonthNext = $aRouter;
+$aMonthNext['month'] = date('Ym', $sMonthNext);
 
 $aPage['planer_content'] .= '<table>';
-$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
-$aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
+$aPage['planer_content'] .= '<thead>';
+
+$aPage['planer_content'] .= '<tr>';
+$aPage['planer_content'] .= '<td colspan="1" style="text-align: left;">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
+$aPage['planer_content'] .= '</td>';
+$aPage['planer_content'] .= '<td colspan="5" style="text-align: center;"><b>'. date('F Y', $sUserSelection) .'</b></td>';
+$aPage['planer_content'] .= '<td colspan="1" style="text-align: right;">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthNext) .'">'. date('F', $sMonthNext) .'</a></button>';
+$aPage['planer_content'] .= '</td>';
+$aPage['planer_content'] .= '</tr>';
+
+#$aPage['planer_content'] .= '<tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
+#$aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr>';
+
+$aPage['planer_content'] .= '</thead>';
 
 $iDateNow = date('w');
 $iDatePrev = date('w', strtotime(date('Y-m-1', $sUserSelection))) - 1;
@@ -74,15 +97,16 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 }
 
 # table footer
+/*
 if (!isset($aRouter['month'])) $sLinkFootDate = time();
 else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
-# 
 $sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
 $sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
 $aMonthPrev = $aRouter;
 $aMonthPrev['month'] = date('Ym', $sMonthPrev);
 $aMonthNext = $aRouter;
 $aMonthNext['month'] = date('Ym', $sMonthNext);
+
 $aPage['planer_content'] .= '<tfoot><tr>';
 $aPage['planer_content'] .= '<td colspan="1">';
 $aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
@@ -94,7 +118,7 @@ $aPage['planer_content'] .= '</td>';
 $aPage['planer_content'] .= '</tr></tfoot>';
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
-
+*/
 /*
 10 P	5. Daten bearbeiten: Erstellen Sie einen internen Bereich 
 		mit einer Anzeige der Verwaltungsübersicht inkl. Sortierung der Daten.		

@@ -13,7 +13,7 @@ $aPage['title'] = 'Terminplaner';
 if (!isset($aRouter['month'])) $sUserSelection = time();
 else $sUserSelection = strtotime($aRouter['month'] .'01 12:00:00');
 
-# content
+# Content
 $aTableWeekDays = array('Mon.','Tue.','Wed.','Thu.','Fri.','Sat.','Sun.');
 $sTableHeaderContent = array();
 foreach($aTableWeekDays as $s) array_push($sTableHeaderContent, '<th>'. $s .'</th>');
@@ -23,9 +23,31 @@ $iDateNext = 7 - date('w', strtotime(date('Y-m-t', $sUserSelection)));
 $iDatePrevTable = strtotime(date('Y-m-1', $sUserSelection) .' - '. $iDatePrev .' days'); //
 $iDateNextTable = strtotime(date('Y-m-t', $sUserSelection) .' + '. $iDateNext .' days'); //<<
 
-# table header
+# Table Month
+if (!isset($aRouter['month'])) $sLinkFootDate = time();
+else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
+$sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
+$sMonthNext = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' + 1 Month');
+$aMonthPrev = $aRouter;
+$aMonthPrev['month'] = date('Ym', $sMonthPrev);
+$aMonthNext = $aRouter;
+$aMonthNext['month'] = date('Ym', $sMonthNext);
+
+
+# Table Header
 $aPage['planer_content'] .= '<table>';
-$aPage['planer_content'] .= '<thead><tr><th colspan="7">'. date('F Y', $sUserSelection) .'</th></tr>';
+$aPage['planer_content'] .= '<thead>';
+
+$aPage['planer_content'] .= '<tr><th colspan="2"  style="text-align: left;">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
+$aPage['planer_content'] .= '</th>';
+$aPage['planer_content'] .= '<td colspan="3" style="text-align: center;"><b>'. date('F Y', $sUserSelection) .'</b></td>';
+$aPage['planer_content'] .= '<th colspan="2" style="text-align: right;">';
+$aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthNext) .'">'. date('F', $sMonthNext) .'</a></button>';
+$aPage['planer_content'] .= '</th></tr>';
+
+#<th colspan="7">'. date('F Y', $sUserSelection) .'</th>';
+
 $aPage['planer_content'] .= '<tr>'. implode('', $sTableHeaderContent) .'</tr></thead>';
 $aPage['planer_content'] .= '<tbody>';
 $sField = $sChecked = '';
@@ -45,7 +67,8 @@ for ($i = $iDatePrevTable, $k=0; $i <= $iDateNextTable; $i = $i + (24*60*60), $k
 	}
 }
 
-# table footer
+# Table Month
+/*
 if (!isset($aRouter['month'])) $sLinkFootDate = time();
 else $sLinkFootDate = strtotime($aRouter['month'] .'01 12:00:00');
 $sMonthPrev = strtotime(date('Y-m-d 12:00:00', $sLinkFootDate) .' - 1 Month');
@@ -54,6 +77,7 @@ $aMonthPrev = $aRouter;
 $aMonthPrev['month'] = date('Ym', $sMonthPrev);
 $aMonthNext = $aRouter;
 $aMonthNext['month'] = date('Ym', $sMonthNext);
+
 $aPage['planer_content'] .= '<tfoot><tr>';
 $aPage['planer_content'] .= '<td colspan="2">';
 $aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthPrev) .'">'. date('F', $sMonthPrev) .'</a></button>';
@@ -63,6 +87,8 @@ $aPage['planer_content'] .= '<td colspan="2">';
 $aPage['planer_content'] .= '<button><a href="/?'. http_build_query($aMonthNext) .'">'. date('F', $sMonthNext) .'</a></button>';
 $aPage['planer_content'] .= '</td>';
 $aPage['planer_content'] .= '</tr></tfoot>';
+*/
+
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_content'] .= '</table>';
 
