@@ -91,6 +91,7 @@ if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query(
 else $sSubmitDelete = '';
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td>';
+$aPage['planer_sidebar'] .= '<input type="hidden" value="100" name="planer_submit" >' .PHP_EOL;
 $aPage['planer_sidebar'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitDelete .PHP_EOL;
