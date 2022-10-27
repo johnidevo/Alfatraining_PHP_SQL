@@ -47,7 +47,7 @@ function widget_js()
 		$sScript = file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.js');
 		$sScriptCall = $aRouter['page'] .'.on.load();';
 	}
-	else{
+	else {
 		$sScript = $sScriptCall = '';
 	}
 	
@@ -73,9 +73,9 @@ function widget_css()
 	if (file_exists(DRAFT .'static/'. $aRouter['page'] .'.css'))
 	$aWidget['style'][] = '<style>'. file_get_contents(DRAFT .'static/'. $aRouter['page'] .'.css') .'</style>';
 	if ($aRouter['theme'] == 'light')
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
+		$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/water.css">';
 	else 
-	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/dark.css">';
+		$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/dark.css">';
 	$aWidget['style'][] = '<link rel="stylesheet" href="/draft/static/layer.css">';
 	return true;
 }
