@@ -57,6 +57,14 @@ function user_register()
 	
 	if (!user_verify()) return true;
 	if (!isset($_POST['username']) or !isset($_POST['password'])) return true;
+		
+	$sQuery = "SELECT * FROM `users` WHERE `user` LIKE '". $_POST['username'] ."' AND `password` LIKE '". $_POST['password'] ."' ";
+	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
+	if (!is_null($aResults))
+	{
+		if (!event_error('Benutzer bereits vergeben. Bitte nehmen Sie eine andere')) error_throw('event_error()'); 
+		return true;
+	}
 	
 	$sDateRegistration = strtotime('now');
 	$sQuery = "INSERT INTO `users` (`id`, `user`, `password`, `registration`) 
