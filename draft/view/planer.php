@@ -103,6 +103,7 @@ $aPage['planer_sidebar'] .= '</table>';
 15 P	6. Daten einfügen: Erstellen Sie ein Formular zum Erstellen 
 		von neuen Terminen und speichern Sie den Termin in der Datenbank.		
 */
+if (isset($aRouter['id'])) unset($aRouter['id']);
 $aPage['content'] .= '
 	<form action="/?'. http_build_query($aRouter) .'" method="post">
 		<div id="content">

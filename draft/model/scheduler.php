@@ -52,7 +52,7 @@ function scheduler_planer_update()
 	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
-	/*  */
+	/* */
 	if (empty($_POST)) return true;
 	if (!isset($_POST['date_planer'])) return event_error();
 	if (!isset($_POST['hour_planer'])) return event_error();
@@ -60,18 +60,18 @@ function scheduler_planer_update()
 	$sQuery = "UPDATE `appointments` SET `date` = '". $iDate ."' WHERE `appointments`.`id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
 	if (!event_success()) error_throw('event_success()');
-	/*  */
+	/* */
 	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
-	#unset($aRouter['id']);
+	unset($aRouter['id']);
 	return true;
 }
 
 function scheduler_planer_delete()
 {
 	global $aRouter, $sQuery, $aResults;
-	/*  */
+	/* */
 	if (!isset($aRouter['delete'])) return event_error();
 	$sQuery = "DELETE FROM `appointments` WHERE `id` = ". $aRouter['delete'] .";";
 	if (!frontend_sql_query()) error_throw('frontend_sql_query()');
@@ -83,7 +83,7 @@ function scheduler_planer_delete()
 function scheduler_planer_month()
 {
 	global $aRouter, $sQuery, $aResults;
-	/*  */
+	/* */
 	if (!isset($aRouter['month'])) return event_error();
 	$sQuery = "SELECT * FROM `appointments` WHERE `date` = "
 		. strtotime(date('Ym01', strtotime( $aRouter['month'] .'01 12:00:00' ))) 
