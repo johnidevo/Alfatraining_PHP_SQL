@@ -25,11 +25,11 @@ function scheduler_init()
 function scheduler_planer()
 {
 	global $aRouter, $sQuery, $aResults, $aEvent;
-	
-	if (!empty($_POST)) return scheduler_planer_new();
+	var_dump($aRouter);
 	if (isset($aRouter['id'])) return scheduler_planer_update();
 	if (isset($aRouter['delete'])) return scheduler_planer_delete();
 	if (isset($aRouter['month'])) return scheduler_planer_month();
+	if (!empty($_POST)) return scheduler_planer_new();
 	
 	return true;
 }
@@ -68,7 +68,7 @@ function scheduler_planer_update()
 	$sQuery = "SELECT * FROM `appointments` WHERE `id` = ". $aRouter['id'] .";";
 	if (!frontend_sql_fetch()) error_throw('frontend_sql_fetch()');
 	$aScheduler['update'] = $aResults;
-	unset($aRouter['id']);
+	#unset($aRouter['id']);
 	return true;
 }
 

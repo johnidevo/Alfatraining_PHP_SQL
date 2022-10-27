@@ -78,23 +78,39 @@ for ($i = 9; $i <= 15; $i++)
 	$aPage['planer_sidebar'] .= '<tr>'. $sField .'</tr>';
 	$sField = $sChecked = '';
 }
-if (isset($aScheduler['update'])) $sSubmitValue = 'Aktualisieren';
-else $sSubmitValue = 'Einreichen';
+
+if (isset($aScheduler['update']))
+{
+	$sSubmitValue = 'Aktualisieren';
+	$sSubmitValue =  '<input type="hidden" value="'. $aRouter['id'] .'"><input type="submit" value="'. $sSubmitValue .'">';
+}
+else 
+{
+	$sSubmitValue = 'Einreichen';
+	$sSubmitValue = '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
+}
+
 $aCancel = $aRouter;
 if (isset($aCancel['id'])) unset($aCancel['id']);
-if (isset($aScheduler['update'])) $sSubmitCancel = '<a href="/?'. http_build_query($aCancel) .'">Abbrechen</a>';
+if (isset($aScheduler['update'])) $sSubmitCancel = '<button><a href="/?'. http_build_query($aCancel) .'">Abbrechen</a></button>';
 else $sSubmitCancel = '';
+
 $aDelete = $aRouter;
 if (isset($aDelete['id'])) unset($aDelete['id']);
 if (isset($aRouter['id'])) $aDelete['delete'] = $aRouter['id'];
-if (isset($aDelete['delete'])) $sSubmitDelete = '<a href="/?'. http_build_query($aDelete) .'">Löschen</a>';
+if (isset($aDelete['delete'])) $sSubmitDelete = '<button><a href="/?'. http_build_query($aDelete) .'">Löschen</a></button>';
 else $sSubmitDelete = '';
+
+$aEdit = $aRouter;
+if (isset($aEdit['id'])) $sSubmitEdit = '<a href="/?'. http_build_query($aEdit) .'">Aktualisieren</a>';
+else $sSubmitEdit = '';
+
+
 $aPage['planer_content'] .= '</tbody>';
 $aPage['planer_sidebar'] .= '<tfoot><tr><td>';
-$aPage['planer_sidebar'] .= '<input type="hidden" value="100" name="planer_submit" >' .PHP_EOL;
-$aPage['planer_sidebar'] .= '<input type="submit" value="'. $sSubmitValue .'">' .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitCancel .PHP_EOL;
 $aPage['planer_sidebar'] .= $sSubmitDelete .PHP_EOL;
+$aPage['planer_sidebar'] .= $sSubmitValue .PHP_EOL;
 $aPage['planer_sidebar'] .= '</td></tr></tfoot>';
 $aPage['planer_sidebar'] .= '</table>';
 
